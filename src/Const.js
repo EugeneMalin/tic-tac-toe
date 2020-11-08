@@ -3,7 +3,7 @@ export const ITEM_HEIGHT = 48;
 
 export const ITEM_PADDING_TOP = 8;
 
-export const DEFAULT_MODE = 'signle';
+export const DEFAULT_MODE = 'multi';
 
 export const DEFAULT_COMPLEXITY = 'low';
 
