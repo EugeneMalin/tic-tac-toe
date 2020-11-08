@@ -1,0 +1,15 @@
+.GameField {
+    display: flex;
+}
+
+.GameField-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.GameField-point {
+    display: flex;
+    margin: 4px;
+    align-items: center;
+    justify-content: center;
+}
