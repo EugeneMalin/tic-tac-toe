@@ -1,0 +1,10 @@
+.Header {
+    display: flex;
+    align-items: baseline;
+}
+
+.Header .Header-mode,
+.Header .Header-complexity {
+    width: 250px;
+    margin: 0 6px;
+}
