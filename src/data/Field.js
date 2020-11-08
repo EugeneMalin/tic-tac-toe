@@ -79,10 +79,9 @@ export class Field {
 
     _checkLine(x, y, direction) {
         const point = this.points[x][y];
-        const lineSize = Math.min(MIN_FEILD_SIZE, this.points.length, this.points[0].length);
+        const lineSize = Math.min(this.points.length, this.points[0].length);
         let pointsCount = 0;
         let winLine = [];
-        console.log(`__________${direction}___________`)
         for (let step = 0; step < lineSize; step++) {
             const directXStep = step * (direction === 0 || direction === 6 || direction === 7 ?
                 1 : (direction === 1 || direction === 5 ? 0 : -1));
@@ -92,7 +91,6 @@ export class Field {
             const newX = x - directXStep;
             const newY = y - directYStep;
 
-            console.log(`${newX}, ${newY}`)
             if (pointsCount > lineSize - 1) {
                 continue;
             }
