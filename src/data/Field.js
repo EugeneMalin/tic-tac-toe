@@ -30,6 +30,10 @@ export class Field {
         return !this.freeCount;
     }
     
+    isClear() {
+        return this.freeCount === this.points.length * this.points[0].length;
+    }
+
     map(callback) {
         return this.points.map(callback);
     }
@@ -50,6 +54,7 @@ export class Field {
 
         if (hasWin) {
             this.winLine = winLine;
+            this.winType = point.type;
             winLine.forEach((pointer) => {
                 this.points[pointer[0]][pointer[1]].state = 'active'
             })

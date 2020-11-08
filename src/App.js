@@ -72,7 +72,12 @@ class App extends Component {
           onModeChanged={this.onModeChanged}
         />
         <body className='App-body'>
-          <Icon onClick={this.onResetClicked} color='action'><Loop/></Icon>
+          <div className='App-state'>
+            <Icon onClick={this.onResetClicked} fontSize='large' color='action'><Loop fontSize='large'/></Icon>
+            <div className="App-info">
+              {(this.state.field.isActive() ? `Game is running, there is ${this.state.turn} turn` : `Game is finished! The ${this.state.field.winType} wins!`)}
+            </div>
+          </div>
           <GameField
             field={this.state.field}
             onPointClicked={this.onPointClicked}
