@@ -1,7 +1,9 @@
 import { Component } from 'react';
 import './App.css';
+import { GameField } from './components/GameField';
 import { Header } from './components/Header';
 import { DEFAULT_COMPLEXITY, DEFAULT_MODE } from './Const';
+import { Field } from './data/Field';
 
 
 
@@ -10,11 +12,14 @@ class App extends Component {
     super();
     this.state = {
       complexity: DEFAULT_COMPLEXITY,
-      mode: DEFAULT_MODE
+      mode: DEFAULT_MODE,
+      field: new Field(),
+      turn: 'cross'
     }
 
     this.onComplexityChanged = this.onComplexityChanged.bind(this);
     this.onModeChanged = this.onModeChanged.bind(this);
+    this.onPointClicked = this.onPointClicked.bind(this);
   }
 
   onComplexityChanged(e, complexity) {
@@ -23,6 +28,17 @@ class App extends Component {
 
   onModeChanged(e, mode) {
     this.setState({mode});
+  }
+
+  onPointClicked(e, x, y) {
+    try {
+      this.state.field.update(x, y, this.state.turn);
+      this.setState({
+        turn: this.state.turn === 'cross' ? 'circle' : 'cross'
+      })
+    } catch(e) {
+      console.error(e);
+    }
   }
 
   render() {
@@ -38,6 +54,10 @@ class App extends Component {
         <body className='App-body'>
           <div>Body {`${this.state.complexity} ${this.state.mode}`}</div>
         </body>
+        <GameField
+          field={this.state.field}
+          onPointClicked={this.onPointClicked}
+        />
         <footer className='App-footer'>
           <h6>Eugene Malin</h6>
         </footer>
