@@ -1,3 +1,5 @@
+import { Icon } from '@material-ui/core';
+import { Loop } from '@material-ui/icons';
 import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
@@ -20,6 +22,7 @@ class App extends Component {
     this.onComplexityChanged = this.onComplexityChanged.bind(this);
     this.onModeChanged = this.onModeChanged.bind(this);
     this.onPointClicked = this.onPointClicked.bind(this);
+    this.onResetClicked = this.onResetClicked.bind(this);
   }
 
   onComplexityChanged(e, complexity) {
@@ -41,6 +44,13 @@ class App extends Component {
     }
   }
 
+  onResetClicked() {
+    this.setState({
+      field: new Field(),
+      turn: 'cross'
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -52,12 +62,13 @@ class App extends Component {
           onModeChanged={this.onModeChanged}
         />
         <body className='App-body'>
-          <div>Body {`${this.state.complexity} ${this.state.mode}`}</div>
+          <Icon onClick={this.onResetClicked} color='action'><Loop/></Icon>
+          <GameField
+            field={this.state.field}
+            onPointClicked={this.onPointClicked}
+          />
         </body>
-        <GameField
-          field={this.state.field}
-          onPointClicked={this.onPointClicked}
-        />
+        
         <footer className='App-footer'>
           <h6>Eugene Malin</h6>
         </footer>

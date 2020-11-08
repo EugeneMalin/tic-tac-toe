@@ -6,7 +6,7 @@ import { Point } from "./Point"
 
 const MIN_FEILD_SIZE = 3;
 
-const DIRECTIONS_COUNT = 4;
+const DIRECTIONS_COUNT = 8;
 
 export class Field {
     constructor(size = MIN_FEILD_SIZE) {
@@ -82,15 +82,18 @@ export class Field {
         const lineSize = Math.min(MIN_FEILD_SIZE, this.points.length, this.points[0].length);
         let pointsCount = 0;
         let winLine = [];
+        console.log(`__________${direction}___________`)
+        for (let step = 0; step < lineSize; step++) {
+            const directXStep = step * (direction === 0 || direction === 6 || direction === 7 ?
+                1 : (direction === 1 || direction === 5 ? 0 : -1));
+            const directYStep = step * (direction === 0 || direction === 1 || direction === 2 ? 
+                1 : (direction === 3 || direction === 7 ? 0 : -1));
 
-        for (let step = 0; step < lineSize * 2 - 1; step++) {
-            const directXStep = step * (direction === 0 || direction === 2 ? 1 : (direction === 1 ? 0 : -1));
-            const directYStep = step * (direction === 0 || direction === 1 ? 1 : (direction === 3 ? 0 : -1));
+            const newX = x - directXStep;
+            const newY = y - directYStep;
 
-            const newX = directXStep - x;
-            const newY = directYStep - y;
-
-            if (newX < 0 || newY < 0 || newX >= lineSize || newY >= lineSize || pointsCount > lineSize - 1) {
+            console.log(`${newX}, ${newY}`)
+            if (pointsCount > lineSize - 1) {
                 continue;
             }
 
