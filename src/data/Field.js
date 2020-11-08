@@ -2,9 +2,8 @@
  * Класс для хранения и обработки состояния игрового поля
  */
 
+import { MIN_FEILD_SIZE } from "../Const";
 import { Point } from "./Point"
-
-const MIN_FEILD_SIZE = 3;
 
 const DIRECTIONS_COUNT = 8;
 

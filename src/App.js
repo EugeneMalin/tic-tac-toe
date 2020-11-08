@@ -4,7 +4,7 @@ import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
-import { DEFAULT_COMPLEXITY, DEFAULT_MODE } from './Const';
+import { DEFAULT_COMPLEXITY, DEFAULT_MODE, MIN_FEILD_SIZE } from './Const';
 import { Field } from './data/Field';
 
 
@@ -16,13 +16,15 @@ class App extends Component {
       complexity: DEFAULT_COMPLEXITY,
       mode: DEFAULT_MODE,
       field: new Field(),
-      turn: 'cross'
+      turn: 'cross',
+      size: MIN_FEILD_SIZE
     }
 
     this.onComplexityChanged = this.onComplexityChanged.bind(this);
     this.onModeChanged = this.onModeChanged.bind(this);
     this.onPointClicked = this.onPointClicked.bind(this);
     this.onResetClicked = this.onResetClicked.bind(this);
+    this.onSizeChanged = this.onSizeChanged.bind(this);
   }
 
   onComplexityChanged(e, complexity) {
@@ -46,11 +48,17 @@ class App extends Component {
 
   onResetClicked() {
     this.setState({
-      field: new Field(),
+      field: new Field(this.state.size),
       turn: 'cross'
     })
   }
-
+  onSizeChanged(e, size) {
+    this.setState({
+      size,
+      field: new Field(size),
+      turn: 'cross'
+    });
+  } 
   render() {
     return (
       <div className="App">
@@ -58,6 +66,8 @@ class App extends Component {
           className='App-header'
           complexity={this.state.complexity} 
           mode={this.state.mode}
+          size={this.state.size}
+          onSizeChanged={this.onSizeChanged}
           onComplexityChanged={this.onComplexityChanged}
           onModeChanged={this.onModeChanged}
         />

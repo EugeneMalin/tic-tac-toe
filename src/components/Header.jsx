@@ -2,6 +2,7 @@ import { Complexity } from "./Complexity";
 import { Mode } from "./Mode";
 import './Header.css'
 import { MULTI_MODE } from "../Const";
+import { Size } from "./Size";
 
 export function Header(props) {
     return (
@@ -17,6 +18,11 @@ export function Header(props) {
                 className="Header-complexity"
                 complexity={props.complexity} 
                 onComplexityChanged={props.onComplexityChanged}
+            />
+            <Size
+                className="Header-size"
+                size={props.size}
+                onSizeChanged={props.onSizeChanged}
             />
         </header>
     )

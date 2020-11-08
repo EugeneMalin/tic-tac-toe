@@ -16,6 +16,9 @@ export const COMPLEXITY_LEVELS = [{
     }
 ]
 
+export const MIN_FEILD_SIZE = 3;
+export const MAX_FIELD_SIZE = 15;
+
 export const MULTI_MODE = 'multi';
 
 export const GAME_MODES = [{
@@ -23,3 +26,10 @@ export const GAME_MODES = [{
 }, {
     name: MULTI_MODE
 }]
+
+export const FIELD_SIZE = [];
+for(let i = MIN_FEILD_SIZE; i < MAX_FIELD_SIZE; i++) {
+    FIELD_SIZE.push({
+        value: i
+    })
+}
