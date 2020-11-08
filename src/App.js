@@ -80,7 +80,7 @@ class App extends Component {
         </body>
         
         <footer className='App-footer'>
-          <h6>Eugene Malin</h6>
+          <h6>Eugene Novikov 2020</h6>
         </footer>
       </div>
     );
