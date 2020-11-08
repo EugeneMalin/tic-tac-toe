@@ -11,7 +11,7 @@ const DIRECTIONS_COUNT = 4;
 export class Field {
     constructor(size = MIN_FEILD_SIZE) {
         this.points = [];
-
+        this.freeCount = size * size
         this.winLine = null;
 
         for (let i = 0; i < size; i++) {
@@ -25,6 +25,10 @@ export class Field {
 
     isActive() {
         return !this.winLine
+    }
+
+    isFull() {
+        return !this.freeCount;
     }
     
     map(callback) {
@@ -40,6 +44,8 @@ export class Field {
 
         point.state = 'default';
         point.type = type;
+
+        this.freeCount--;
 
         const [hasWin, winLine] = this._checkState(x, y);
 
@@ -63,8 +69,10 @@ export class Field {
         let [hasWinLine, winLine] = [false, []];
 
         for (let dir = 0; dir < DIRECTIONS_COUNT; dir++) {
+            if (hasWinLine) {
+                continue
+            }
             [hasWinLine, winLine] = this._checkLine(x, y, dir);
-            console.log('_________________')
         }
         return [hasWinLine, winLine];
     }
@@ -81,9 +89,8 @@ export class Field {
 
             const newX = directXStep - x;
             const newY = directYStep - y;
-            console.log(`[${newX}, ${newY}]`)
 
-            if (newX < 0 || newY < 0 || newX >= lineSize || newY >= lineSize) {
+            if (newX < 0 || newY < 0 || newX >= lineSize || newY >= lineSize || pointsCount > lineSize - 1) {
                 continue;
             }
 
@@ -96,6 +103,6 @@ export class Field {
                 winLine = []
             }
         }
-        return [pointsCount >= lineSize - 1, winLine];
+        return [pointsCount > lineSize - 1, winLine];
     }
 }
