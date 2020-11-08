@@ -12,7 +12,7 @@ const MenuProps = {
 
 export function Complexity(props) {
     return (
-        <FormControl className={`Complexity ${props.className}`}>
+        <FormControl disabled={props.disabled} className={`Complexity ${props.className}`}>
             <InputLabel className="Complexity-label" id="complexity-label">Complexity</InputLabel>
             <Select
                 labelId="complexity-label"

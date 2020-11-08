@@ -1,6 +1,7 @@
 import { Complexity } from "./Complexity";
 import { Mode } from "./Mode";
 import './Header.css'
+import { MULTI_MODE } from "../Const";
 
 export function Header(props) {
     return (
@@ -12,6 +13,7 @@ export function Header(props) {
                 onModeChanged={props.onModeChanged}
             />
             <Complexity
+                disabled={props.mode === MULTI_MODE}
                 className="Header-complexity"
                 complexity={props.complexity} 
                 onComplexityChanged={props.onComplexityChanged}

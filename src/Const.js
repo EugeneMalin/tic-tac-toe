@@ -16,8 +16,10 @@ export const COMPLEXITY_LEVELS = [{
     }
 ]
 
+export const MULTI_MODE = 'multi';
+
 export const GAME_MODES = [{
     name: 'signle'
 }, {
-    name: 'multi'
+    name: MULTI_MODE
 }]
