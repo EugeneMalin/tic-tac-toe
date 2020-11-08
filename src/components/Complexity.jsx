@@ -1,6 +1,5 @@
-
 import { COMPLEXITY_LEVELS, DEFAULT_COMPLEXITY, ITEM_HEIGHT, ITEM_PADDING_TOP } from "../Const";
-import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { Input, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 
 const MenuProps = {
     PaperProps: {
@@ -13,8 +12,8 @@ const MenuProps = {
 
 export function Complexity(props) {
     return (
-        <div className="Complexity">
-            <InputLabel className="Complexity-label" id="complexity-label">Game complexity level</InputLabel>
+        <FormControl className={`Complexity ${props.className}`}>
+            <InputLabel className="Complexity-label" id="complexity-label">Complexity</InputLabel>
             <Select
                 labelId="complexity-label"
                 id="complexity"
@@ -32,6 +31,6 @@ export function Complexity(props) {
                     </MenuItem>
                 ))}
             </Select>
-        </div>
+        </FormControl>
     )
 }
