@@ -2,7 +2,7 @@
   "name": "tic-tac-toe",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:000",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -15,10 +15,12 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"  
   },
   "eslintConfig": {
     "extends": [
