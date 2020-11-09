@@ -31,8 +31,12 @@ export const GAME_MODES = [{
 }]
 
 export const FIELD_SIZE = [];
+export const FIELD_ROW_SIZE = [];
+
 for(let i = MIN_FEILD_SIZE; i < MAX_FIELD_SIZE; i++) {
     FIELD_SIZE.push({
-        value: i
+        value: i,
+        rowSize: MIN_FEILD_SIZE
     })
+    FIELD_ROW_SIZE.push(i)
 }
