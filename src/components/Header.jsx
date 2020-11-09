@@ -7,11 +7,23 @@ import { Mode } from "./Mode";
 import './Header.css'
 import { MULTI_MODE } from "../Const";
 import { Size } from "./Size";
+import { RowSize } from "./RowSize";
 
 export function Header(props) {
     return (
         <header className={`Header ${props.className}`}>
             <h1 className="Header-title">TIC TAC TOE</h1>
+            <Size
+                className="Header-size"
+                size={props.size}
+                onSizeChanged={props.onSizeChanged}
+            />
+            <RowSize
+                className="Header-rowSize"
+                size={props.size}
+                rowSize={props.rowSize}
+                onRowSizeChanged={props.onRowSizeChanged}
+            />
             <Mode
                 disabled={true}
                 className="Header-mode"
@@ -23,11 +35,6 @@ export function Header(props) {
                 className="Header-complexity"
                 complexity={props.complexity} 
                 onComplexityChanged={props.onComplexityChanged}
-            />
-            <Size
-                className="Header-size"
-                size={props.size}
-                onSizeChanged={props.onSizeChanged}
             />
         </header>
     )

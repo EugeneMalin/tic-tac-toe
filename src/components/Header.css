@@ -8,7 +8,8 @@
 }
 
 .Header .Header-mode,
-.Header .Header-complexity {
-    width: 150px;
+.Header .Header-complexity,
+.Header .Header-size,
+.Header .Header-rowSize {
     margin: 0 6px;
 }
