@@ -5,7 +5,7 @@
 import { MIN_FEILD_SIZE } from "../Const";
 import { Point } from "./Point"
 
-const DIRECTIONS_COUNT = 8;
+const DIRECTIONS_COUNT = 4;
 
 export class Field {
     constructor(size = MIN_FEILD_SIZE) {
@@ -86,7 +86,7 @@ export class Field {
         const lineSize = Math.min(this.points.length, this.points[0].length);
         let pointsCount = 0;
         let winLine = [];
-        for (let step = 0; step < lineSize; step++) {
+        for (let step = - lineSize + 1; step < lineSize; step++) {
             const directXStep = step * (direction === 0 || direction === 6 || direction === 7 ?
                 1 : (direction === 1 || direction === 5 ? 0 : -1));
             const directYStep = step * (direction === 0 || direction === 1 || direction === 2 ? 
