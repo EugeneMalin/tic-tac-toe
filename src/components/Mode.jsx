@@ -16,7 +16,7 @@ const MenuProps = {
 
 export function Mode(props) {
     return (
-        <FormControl className={`Mode ${props.className}`}>
+        <FormControl disabled={props.disabled} className={`Mode ${props.className}`}>
             <InputLabel className="Mode-label" id="mode-label">Mode</InputLabel>
             <Select
                 labelId="mode-label"

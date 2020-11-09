@@ -12,7 +12,8 @@ export function Header(props) {
     return (
         <header className={`Header ${props.className}`}>
             <h1 className="Header-title">TIC TAC TOE</h1>
-            <Mode 
+            <Mode
+                disabled={true}
                 className="Header-mode"
                 mode={props.mode}
                 onModeChanged={props.onModeChanged}
