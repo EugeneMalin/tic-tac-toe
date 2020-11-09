@@ -15,7 +15,8 @@ class App extends Component {
       mode: DEFAULT_MODE,
       field: new Field(),
       turn: DEFAULT_START_TURN,
-      size: MIN_FEILD_SIZE
+      size: MIN_FEILD_SIZE,
+      rowSize: MIN_FEILD_SIZE
     }
 
     this.onComplexityChanged = this.onComplexityChanged.bind(this);
@@ -23,6 +24,16 @@ class App extends Component {
     this.onPointClicked = this.onPointClicked.bind(this);
     this.onResetClicked = this.onResetClicked.bind(this);
     this.onSizeChanged = this.onSizeChanged.bind(this);
+    this.onRowSizeChanged = this.onRowSizeChanged.bind(this);
+  }
+
+  /**
+   * Handler for row of units
+   * @param {Event} e 
+   * @param {Number} rowSize number of units
+   */
+  onRowSizeChanged(e, rowSize) {
+    this.setState({rowSize})
   }
 
   /**
@@ -65,7 +76,7 @@ class App extends Component {
    */
   onResetClicked() {
     this.setState({
-      field: new Field(this.state.size),
+      field: new Field(this.state.size, this.state.rowSize),
       turn: DEFAULT_START_TURN
     })
   }
@@ -74,11 +85,12 @@ class App extends Component {
    * Handler for size changing
    * @param {Event} e 
    * @param {Number} size 
+   * @param {Number} rowSize
    */
-  onSizeChanged(e, size) {
+  onSizeChanged(e, size, rowSize) {
     this.setState({
       size,
-      field: new Field(size),
+      field: new Field(size, rowSize),
       turn: DEFAULT_START_TURN
     });
   }
@@ -91,7 +103,9 @@ class App extends Component {
           complexity={this.state.complexity} 
           mode={this.state.mode}
           size={this.state.size}
+          rowSize={this.state.rowSize}
           onSizeChanged={this.onSizeChanged}
+          onRowSizeChanged={this.onRowSizeChanged}
           onComplexityChanged={this.onComplexityChanged}
           onModeChanged={this.onModeChanged}
         />

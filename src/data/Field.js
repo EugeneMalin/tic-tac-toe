@@ -19,10 +19,11 @@ import { Point } from "./Point"
 const DIRECTIONS_COUNT = 4;
 
 export class Field {
-    constructor(size = MIN_FEILD_SIZE) {
+    constructor(size = MIN_FEILD_SIZE, rowSize = MIN_FEILD_SIZE) {
         this.points = [];
         this.freeCount = size * size
         this.winLine = null;
+        this.rowSize = rowSize;
 
         for (let i = 0; i < size; i++) {
             const row = []
@@ -116,15 +117,15 @@ export class Field {
      */
     _extractWinFromLine(x, y, direction) {
         const point = this.points[x][y];
-        const lineSize = Math.min(this.points.length, this.points[0].length);
+        
         let pointsCount = 0;
         let winLine = [];
-        for (let step = - lineSize + 1; step < lineSize; step++) {
+        for (let step = - this.rowSize + 1; step < this.rowSize; step++) {
             const [directionX, directionY] = this._extractdirectionVector(direction)
             const newX = x - directionX * step;
             const newY = y - directionY * step;
 
-            if (pointsCount > lineSize - 1) {
+            if (pointsCount > this.rowSize - 1) {
                 continue;
             }
 
@@ -137,7 +138,7 @@ export class Field {
                 winLine = []
             }
         }
-        return [pointsCount > lineSize - 1, winLine];
+        return [pointsCount > this.rowSize - 1, winLine];
     }
 
     /**
