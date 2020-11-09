@@ -17,20 +17,20 @@ const MenuProps = {
 export function Size(props) {
     return (
         <FormControl disabled={props.disabled} className={`Size ${props.className}`}>
-            <InputLabel className="Size-label" id="size-label">Size{props.additionalLabel ? ' ' + props.additionalLabel : ''}</InputLabel>
+            <InputLabel className="Size-label" id="size-label">Size</InputLabel>
             <Select
                 labelId="size-label"
                 id="size"
                 className="Size-value"
                 onChange={(e, item) => {
-                    props.onSizeChanged(e, item.props.value)
+                    props.onSizeChanged(e, item.props.value, item.props.rowSize)
                 }}
                 MenuProps={MenuProps}
                 input={<Input />}
                 value={props.size || MIN_FEILD_SIZE}
             >
-                {FIELD_SIZE.map(({value}) => (
-                    <MenuItem key={value} value={value}>
+                {FIELD_SIZE.map(({value, rowSize}) => (
+                    <MenuItem key={value} value={value} rowSize={rowSize}>
                     {`${value} x ${value}`}
                     </MenuItem>
                 ))}
