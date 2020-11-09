@@ -33,7 +33,10 @@ class App extends Component {
    * @param {Number} rowSize number of units
    */
   onRowSizeChanged(e, rowSize) {
-    this.setState({rowSize})
+    this.setState({
+      rowSize,
+      field: new Field(this.state.size, rowSize)
+    })
   }
 
   /**
@@ -90,8 +93,7 @@ class App extends Component {
   onSizeChanged(e, size, rowSize) {
     this.setState({
       size,
-      field: new Field(size, rowSize),
-      turn: DEFAULT_START_TURN
+      field: new Field(size, rowSize)
     });
   }
 
@@ -103,6 +105,7 @@ class App extends Component {
           complexity={this.state.complexity} 
           mode={this.state.mode}
           size={this.state.size}
+          disabled={!this.state.field.isClear()}
           rowSize={this.state.rowSize}
           onSizeChanged={this.onSizeChanged}
           onRowSizeChanged={this.onRowSizeChanged}

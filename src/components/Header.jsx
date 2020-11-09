@@ -15,23 +15,25 @@ export function Header(props) {
             <h1 className="Header-title">TIC TAC TOE</h1>
             <Size
                 className="Header-size"
+                disabled={props.disabled}
                 size={props.size}
                 onSizeChanged={props.onSizeChanged}
             />
             <RowSize
+                disabled={props.disabled}
                 className="Header-rowSize"
                 size={props.size}
                 rowSize={props.rowSize}
                 onRowSizeChanged={props.onRowSizeChanged}
             />
             <Mode
-                disabled={true}
+                disabled={true || props.disabled}
                 className="Header-mode"
                 mode={props.mode}
                 onModeChanged={props.onModeChanged}
             />
             <Complexity
-                disabled={props.mode === MULTI_MODE}
+                disabled={props.mode === MULTI_MODE || props.disabled}
                 className="Header-complexity"
                 complexity={props.complexity} 
                 onComplexityChanged={props.onComplexityChanged}
