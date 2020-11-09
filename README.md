@@ -1,6 +1,6 @@
 # TIC TAC TOE
 
-Simple realization of tic-tac-toe game using React
+Simple realization of tic-tac-toe game using React. [Check on Heroku](https://eugenes-tic-tac-toe.herokuapp.com/)
 
 ## TODO
 
@@ -13,13 +13,13 @@ Simple realization of tic-tac-toe game using React
 
 In the project directory, you can run:
 
+### `npm dev`
+
+Runs the app in dev mode using `react-scripts start`
+
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Runs the app in the production mode using `serve -s build`
 
 ### `npm test`
 
