@@ -1,13 +1,10 @@
-import { Icon } from '@material-ui/core';
-import { Loop } from '@material-ui/icons';
 import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
 import { DEFAULT_COMPLEXITY, DEFAULT_MODE, MIN_FEILD_SIZE } from './Const';
 import { Field } from './data/Field';
-
-
+import { State } from './components/State'
 
 class App extends Component {
   constructor() {
@@ -72,12 +69,12 @@ class App extends Component {
           onModeChanged={this.onModeChanged}
         />
         <body className='App-body'>
-          <div className='App-state'>
-            <Icon onClick={this.onResetClicked} fontSize='large' color='action'><Loop fontSize='large'/></Icon>
-            <div className="App-info">
-              {(this.state.field.isActive() ? `Game is running, there is ${this.state.turn} turn` : `Game is finished! The ${this.state.field.winType} wins!`)}
-            </div>
-          </div>
+          <State
+            className='App-state'
+            field={this.state.field}
+            turn={this.state.turn}
+            onResetClicked={this.onResetClicked}
+          />
           <GameField
             field={this.state.field}
             onPointClicked={this.onPointClicked}

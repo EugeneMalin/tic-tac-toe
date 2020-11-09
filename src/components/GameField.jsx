@@ -1,5 +1,6 @@
 import { Point } from "./Point"
 import './GameField.css'
+
 export function GameField(props) {
     return (<div className={`GameField ${props.className}`}>
         {props.field.map((row, i) => (<div key={`${i}row`} className="GameField-col">

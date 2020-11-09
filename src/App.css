@@ -11,8 +11,3 @@
   justify-content: center;
   flex-direction: column;
 }
-
-.App-state {
-  display: flex;
-  align-items: center;
-}
