@@ -2,7 +2,8 @@ import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
-import { DEFAULT_COMPLEXITY, DEFAULT_MODE, MIN_FEILD_SIZE } from './Const';
+import { DEFAULT_COMPLEXITY, DEFAULT_MODE, MIN_FEILD_SIZE, DEFAULT_START_TURN,
+         CIRCLE_PLAYER } from './Const';
 import { Field } from './data/Field';
 import { State } from './components/State'
 
@@ -13,7 +14,7 @@ class App extends Component {
       complexity: DEFAULT_COMPLEXITY,
       mode: DEFAULT_MODE,
       field: new Field(),
-      turn: 'cross',
+      turn: DEFAULT_START_TURN,
       size: MIN_FEILD_SIZE
     }
 
@@ -36,7 +37,7 @@ class App extends Component {
     try {
       this.state.field.update(x, y, this.state.turn);
       this.setState({
-        turn: this.state.turn === 'cross' ? 'circle' : 'cross'
+        turn: this.state.turn === DEFAULT_START_TURN ? CIRCLE_PLAYER : DEFAULT_START_TURN
       })
     } catch(e) {
       console.error(e);
@@ -46,14 +47,14 @@ class App extends Component {
   onResetClicked() {
     this.setState({
       field: new Field(this.state.size),
-      turn: 'cross'
+      turn: DEFAULT_START_TURN
     })
   }
   onSizeChanged(e, size) {
     this.setState({
       size,
       field: new Field(size),
-      turn: 'cross'
+      turn: DEFAULT_START_TURN
     });
   } 
   render() {

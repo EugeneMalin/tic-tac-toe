@@ -1,4 +1,3 @@
-
 export const ITEM_HEIGHT = 48;
 
 export const ITEM_PADDING_TOP = 8;
@@ -18,6 +17,10 @@ export const COMPLEXITY_LEVELS = [{
 
 export const MIN_FEILD_SIZE = 3;
 export const MAX_FIELD_SIZE = 15;
+
+export const CROSS_PLAYER = 'cross';
+export const CIRCLE_PLAYER = 'circle';
+export const DEFAULT_START_TURN = CROSS_PLAYER;
 
 export const MULTI_MODE = 'multi';
 
