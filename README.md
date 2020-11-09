@@ -4,7 +4,6 @@ Simple realization of tic-tac-toe game using React
 
 ## TODO
 
-* рефакторинг ночного кода
 * добавление jsdoc
 * реализовать выбор игрока
 * реализовать простой AI на рандоме для low
