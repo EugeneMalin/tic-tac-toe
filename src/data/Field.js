@@ -5,6 +5,17 @@
 import { MIN_FEILD_SIZE } from "../Const";
 import { Point } from "./Point"
 
+/**
+ * Количество направлений для проверки
+ * 
+ * пример обработки на минимальном размере
+ *          N          +   +   +
+ *        NW NE          + + +
+ *      W       E      * * 0 + +
+ *        SW SE          * * *
+ *          S          *   *   *
+ * 0 - это точка соответствующая х и у
+ */
 const DIRECTIONS_COUNT = 4;
 
 export class Field {
@@ -22,22 +33,41 @@ export class Field {
         }
     }
 
+    /**
+     * Проверка что поле еще доступно на изменение
+     */
     isActive() {
         return !this.winLine
     }
 
+    /**
+     * Проверка что на поле еще есть место для хода
+     */
     isFull() {
         return !this.freeCount;
     }
     
+    /**
+     * Проверка что поле полностью свободно (игра не началась)
+     */
     isClear() {
         return this.freeCount === this.points.length * this.points[0].length;
     }
 
+    /**
+     * @see Array.prototype:map
+     * @param {Function} callback 
+     */
     map(callback) {
         return this.points.map(callback);
     }
 
+    /**
+     * Game field changing
+     * @param {Number} x horizontal position
+     * @param {Number} y vertical position
+     * @param {String} type active player
+     */
     update(x, y, type) {
         const point = this.points[x][y];
 
@@ -50,7 +80,7 @@ export class Field {
 
         this.freeCount--;
 
-        const [hasWin, winLine] = this._checkState(x, y);
+        const [hasWin, winLine] = this._extractWin(x, y);
 
         if (hasWin) {
             this.winLine = winLine;
@@ -61,39 +91,38 @@ export class Field {
         }
     }
 
-    _checkState(x, y) {
-        // пример обработки на минимальном размере
-        //     N          +   +   +
-        //   NW NE          + + +
-        // W       E      * * 0 + +
-        //   SW SE          * * *
-        //     S          *   *   *
-        // 0 - это точка соответствующая х и у
-
+    /**
+     * Counting nearest win line
+     * @param {Number} x horizontal position
+     * @param {Number} y vertical position
+     */
+    _extractWin(x, y) {
         let [hasWinLine, winLine] = [false, []];
 
         for (let dir = 0; dir < DIRECTIONS_COUNT; dir++) {
             if (hasWinLine) {
                 continue
             }
-            [hasWinLine, winLine] = this._checkLine(x, y, dir);
+            [hasWinLine, winLine] = this._extractWinFromLine(x, y, dir);
         }
         return [hasWinLine, winLine];
     }
 
-    _checkLine(x, y, direction) {
+    /**
+     * Extracting win from directed line
+     * @param {Number} x horizontal position
+     * @param {Number} y vertical position
+     * @param {Number} direction direction identifier
+     */
+    _extractWinFromLine(x, y, direction) {
         const point = this.points[x][y];
         const lineSize = Math.min(this.points.length, this.points[0].length);
         let pointsCount = 0;
         let winLine = [];
         for (let step = - lineSize + 1; step < lineSize; step++) {
-            const directXStep = step * (direction === 0 || direction === 6 || direction === 7 ?
-                1 : (direction === 1 || direction === 5 ? 0 : -1));
-            const directYStep = step * (direction === 0 || direction === 1 || direction === 2 ? 
-                1 : (direction === 3 || direction === 7 ? 0 : -1));
-
-            const newX = x - directXStep;
-            const newY = y - directYStep;
+            const [directionX, directionY] = this._extractdirectionVector(direction)
+            const newX = x - directionX * step;
+            const newY = y - directionY * step;
 
             if (pointsCount > lineSize - 1) {
                 continue;
@@ -109,5 +138,29 @@ export class Field {
             }
         }
         return [pointsCount > lineSize - 1, winLine];
+    }
+
+    /**
+     * Get unit vector for direction
+     * 
+     * direction | x | y
+     *     0     | + | +
+     *     1     | 0 | +
+     *     2     | - | +
+     *     3     | - | 0
+     *     4     | - | -
+     *     5     | 0 | -
+     *     6     | + | -
+     *     7     | + | 0
+     * 
+     * @param {Number} direction direction key
+     */
+    _extractdirectionVector(direction) {
+        return [
+            (direction === 0 || direction === 6 || direction === 7 ?
+                1 : (direction === 1 || direction === 5 ? 0 : -1)),
+            (direction === 0 || direction === 1 || direction === 2 ? 
+                1 : (direction === 3 || direction === 7 ? 0 : -1))
+        ]
     }
 }
