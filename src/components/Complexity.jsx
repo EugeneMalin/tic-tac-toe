@@ -1,14 +1,18 @@
+/**
+ * Complexity setting component
+ */
+
 import { COMPLEXITY_LEVELS, DEFAULT_COMPLEXITY, ITEM_HEIGHT, ITEM_PADDING_TOP } from "../Const";
 import { Input, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 
 const MenuProps = {
     PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 250,
-      }
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        }
     }
-  };
+};
 
 export function Complexity(props) {
     return (

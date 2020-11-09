@@ -25,14 +25,30 @@ class App extends Component {
     this.onSizeChanged = this.onSizeChanged.bind(this);
   }
 
+  /**
+   * Handler for complexity changing
+   * @param {Event} e 
+   * @param {Number} complexity 
+   */
   onComplexityChanged(e, complexity) {
     this.setState({complexity});
   }
 
+  /**
+   * Handler for mode changing
+   * @param {Event} e 
+   * @param {Number} mode 
+   */
   onModeChanged(e, mode) {
     this.setState({mode});
   }
 
+  /**
+   * Handler for field click
+   * @param {Event} e 
+   * @param {Number} x horizontal position
+   * @param {Number} y vertical position
+   */
   onPointClicked(e, x, y) {
     try {
       this.state.field.update(x, y, this.state.turn);
@@ -44,19 +60,29 @@ class App extends Component {
     }
   }
 
+  /**
+   * Handler for reset click
+   */
   onResetClicked() {
     this.setState({
       field: new Field(this.state.size),
       turn: DEFAULT_START_TURN
     })
   }
+
+  /**
+   * Handler for size changing
+   * @param {Event} e 
+   * @param {Number} size 
+   */
   onSizeChanged(e, size) {
     this.setState({
       size,
       field: new Field(size),
       turn: DEFAULT_START_TURN
     });
-  } 
+  }
+
   render() {
     return (
       <div className="App">

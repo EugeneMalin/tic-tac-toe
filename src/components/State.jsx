@@ -1,3 +1,7 @@
+/**
+ * Game state display
+ */
+
 import './State.css'
 import { Icon } from '@material-ui/core';
 import { Loop } from '@material-ui/icons';

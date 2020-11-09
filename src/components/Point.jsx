@@ -1,3 +1,7 @@
+/**
+ * Unit display component
+ */
+
 import { Icon } from "@material-ui/core";
 
 export function Point(props) {

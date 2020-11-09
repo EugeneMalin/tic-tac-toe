@@ -1,3 +1,7 @@
+/**
+ * Application header component
+ */
+
 import { Complexity } from "./Complexity";
 import { Mode } from "./Mode";
 import './Header.css'

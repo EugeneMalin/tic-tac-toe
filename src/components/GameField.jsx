@@ -1,3 +1,7 @@
+/**
+ * Game field display component
+ */
+
 import { Point } from "./Point"
 import './GameField.css'
 
