@@ -35,11 +35,15 @@ export class Field {
         }
     }
 
-    /**
-     * Проверка что поле еще доступно на изменение
-     */
     isActive() {
-        return !this.winLine
+        return !this.isFull() && !this.hasWinner()
+    }
+
+    /**
+     * Проверка что есть победитель
+     */
+    hasWinner() {
+        return !!this.winLine
     }
 
     /**

@@ -7,10 +7,24 @@ import { Icon } from '@material-ui/core';
 import { Loop } from '@material-ui/icons';
 
 export function State(props) {
+    const status = [];
+    
+    if (!props.field.isActive()) {
+        status.push('Game ends')
+        status.push(props.field.winType ? `the ${props.field.winType} wins!` : 'there is dead heat')
+    } else {
+        if (props.field.isClear()) {
+            status.push('Game starts');
+        } else {
+            status.push('Game is running');
+        }
+        status.push(`there is ${props.turn} turn`)
+    }
+
     return <div className='State'>
         <Icon onClick={props.onResetClicked} fontSize='large' color='action'><Loop fontSize='large'/></Icon>
         <div className="State-info">
-        {(props.field.isActive() ? `Game is running, there is ${props.turn} turn` : `Game is finished! The ${props.field.winType} wins!`)}
+        {status.join(', ')}
         </div>
     </div>
 }
