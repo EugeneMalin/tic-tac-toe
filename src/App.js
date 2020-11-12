@@ -65,9 +65,9 @@ class App extends Component {
    */
   onPointClicked(e, x, y) {
     try {
-      this.state.field.update(x, y, this.state.turn);
       this.setState({
-        turn: this.state.turn === DEFAULT_START_TURN ? CIRCLE_PLAYER : DEFAULT_START_TURN
+        turn: this.state.turn === DEFAULT_START_TURN ? CIRCLE_PLAYER : DEFAULT_START_TURN,
+        field: this.state.field.update(x, y, this.state.turn)
       })
     } catch(e) {
       console.error(e);
