@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
-import { DEFAULT_MODE } from './Const';
+import { CIRCLE_PLAYER, DEFAULT_MODE, SINGLE_MODE } from './Const';
 import { Field } from './data/Field';
 import { State } from './components/State'
 import { Engine } from './data/Engine';
@@ -24,6 +24,19 @@ class App extends Component {
     this.onRowSizeChanged = this.onRowSizeChanged.bind(this);
   }
 
+  componentDidUpdate() {
+    const {field, engine} = this.state;
+    if (this.state.mode === SINGLE_MODE && field.turn === CIRCLE_PLAYER && field.isActive()) {
+      try {
+        this.setState({
+          field: field.update(...engine.getPoint(field))
+        });
+      } catch(e) {
+        console.error(e);
+      }
+    }
+  }
+
   /**
    * Handler for row of units
    * @param {Event} e 
@@ -31,7 +44,7 @@ class App extends Component {
    */
   onRowSizeChanged(e, rowSize) {
     this.setState({
-      field: new Field(this.state.size, rowSize)
+      field: new Field(this.state.field.size, rowSize)
     })
   }
 
@@ -74,7 +87,7 @@ class App extends Component {
    */
   onResetClicked() {
     this.setState({
-      field: new Field(this.state.size, this.state.rowSize)
+      field: new Field(this.state.field.size, this.state.field.rowSize)
     })
   }
 

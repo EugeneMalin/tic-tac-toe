@@ -31,7 +31,7 @@ export class Field {
         for (let i = 0; i < size; i++) {
             const row = []
             for (let j = 0; j < size; j++) {
-                row.push(new Point(j, i));
+                row.push(new Point(i, j));
             }
             this.points.push(row)
         }

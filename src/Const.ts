@@ -38,9 +38,10 @@ export const CIRCLE_PLAYER = 'circle';
 export const DEFAULT_START_TURN = CROSS_PLAYER;
 
 export const MULTI_MODE = 'multi';
+export const SINGLE_MODE = 'single';
 
 export const GAME_MODES = [{
-    name: 'signle'
+    name: SINGLE_MODE
 }, {
     name: MULTI_MODE
 }]

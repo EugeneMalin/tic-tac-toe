@@ -8,7 +8,7 @@ import { IStrategy, PointVector } from "../interface/IStratery";
 import { Point } from "../Point";
  
 export class Weak implements IStrategy {
-    getPoint(field: Field, player: string): PointVector {
+    getPoint(field: Field): PointVector {
         if (!field.isActive()) {
             throw(new Error('Игра уже завершилась!'))
         }
@@ -21,6 +21,6 @@ export class Weak implements IStrategy {
 
         const point: Point = points[Math.floor(Math.random() * points.length)];
 
-        return [point.x, point.y, player];
+        return [point.x, point.y];
     }
 }
