@@ -12,10 +12,10 @@ import { Point } from "./Point"
  *                     0   1     2
  *          N          +   +   +
  *        NW NE          + + +
- *      W       E      * * 0 + + 3
+ *      W       E      * * % + + 3
  *        SW SE          * * *
  *          S          *   *   *
- * 0 - это точка соответствующая х и у
+ * % - это точка соответствующая х и у, относительно которых идет проверка
  */
 const DIRECTIONS_COUNT = 4;
 
@@ -24,6 +24,7 @@ export class Field {
         this.points = [];
         this.freeCount = size * size
         this.winLine = null;
+        this.size = size;
         this.rowSize = rowSize;
         this.turn = DEFAULT_START_TURN;
 
@@ -65,6 +66,7 @@ export class Field {
     }
 
     /**
+     * Выполняет функцию map над каждым элементом списка точек
      * @see Array.prototype:map
      * @param {Function} callback 
      */
@@ -72,8 +74,11 @@ export class Field {
         return this.points.map(callback);
     }
 
+    /**
+     * Выполняет обход всех точек не позволяет менять исходный набор
+     */
     each(callback) {
-        return this.points.forEach((row) => {
+        return [...this.points].forEach((row) => {
             row.forEach(callback);
         });
     }

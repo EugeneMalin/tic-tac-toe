@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
-import { DEFAULT_MODE, MIN_FEILD_SIZE } from './Const';
+import { DEFAULT_MODE } from './Const';
 import { Field } from './data/Field';
 import { State } from './components/State'
 import { Engine } from './data/Engine';
@@ -13,8 +13,6 @@ class App extends Component {
     this.state = {
       mode: DEFAULT_MODE,
       field: new Field(),
-      size: MIN_FEILD_SIZE,
-      rowSize: MIN_FEILD_SIZE,
       engine: new Engine()
     }
 
@@ -33,7 +31,6 @@ class App extends Component {
    */
   onRowSizeChanged(e, rowSize) {
     this.setState({
-      rowSize,
       field: new Field(this.state.size, rowSize)
     })
   }
@@ -89,7 +86,6 @@ class App extends Component {
    */
   onSizeChanged(e, size, rowSize) {
     this.setState({
-      size,
       field: new Field(size, rowSize)
     });
   }
@@ -99,11 +95,11 @@ class App extends Component {
       <div className="App">
         <Header 
           className='App-header'
-          complexity={this.state.engine.getComplexityId()} 
           mode={this.state.mode}
-          size={this.state.size}
+          size={this.state.field.size}
+          rowSize={this.state.field.rowSize}
+          complexity={this.state.engine.getComplexityId()} 
           disabled={!this.state.field.isClear()}
-          rowSize={this.state.rowSize}
           onSizeChanged={this.onSizeChanged}
           onRowSizeChanged={this.onRowSizeChanged}
           onComplexityChanged={this.onComplexityChanged}
