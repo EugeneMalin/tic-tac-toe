@@ -2,7 +2,7 @@
  * Complexity setting component
  */
 
-import { COMPLEXITY_LEVELS, ITEM_HEIGHT, ITEM_PADDING_TOP } from "../Const";
+import { ITEM_HEIGHT, ITEM_PADDING_TOP } from "../Const";
 import { Input, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 import { Engine } from "../data/Engine";
 
@@ -31,7 +31,7 @@ export function Complexity(props) {
                 value={props.complexity}
             >
                 {Engine.getComplexities().map(({id, name}) => (
-                    <MenuItem key={id} value={name}>
+                    <MenuItem key={id} value={id}>
                     {name}
                     </MenuItem>
                 ))}

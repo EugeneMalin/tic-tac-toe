@@ -7,18 +7,30 @@ import { IStrategy, PointVector } from "./interface/IStratery";
  * Класс обертка над AI, AI представляют собой стратегии работающие на основе игрового поля
  */
 export class Engine implements IStrategy {
-    private _strategy: IComplexity;
+    private _complexity: IComplexity;
 
-    constructor(key: number) {
-        this._strategy = COMPLEXITY_LEVELS.find(item => item.id === key) || DEFAULT_COMPLEXITY;
+    constructor(key: number = 0) {
+        this._complexity = COMPLEXITY_LEVELS.find(item => item.id === key) || DEFAULT_COMPLEXITY;
+    }
+
+    getComplexityId(): number {
+        return this._complexity.id;
+    }
+
+    updateComplexity(key: number): Engine {
+        const newComplexity = COMPLEXITY_LEVELS.find(item => item.id === key);
+        if (newComplexity) {
+            this._complexity = newComplexity;
+        }
+        return this;
     }
 
     getPoint(field: Field): PointVector {
-        if (!this._strategy.strategy) {
+        if (!this._complexity.strategy) {
             throw(new Error('Стратегия не установлена!'))
         }
 
-        return this._strategy.strategy?.getPoint(field);
+        return this._complexity.strategy?.getPoint(field);
     }
     
     static getComplexities(): IComplexity[] {

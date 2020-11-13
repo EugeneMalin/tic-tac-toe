@@ -6,17 +6,18 @@ import { DEFAULT_MODE, MIN_FEILD_SIZE, DEFAULT_START_TURN,
          CIRCLE_PLAYER } from './Const';
 import { Field } from './data/Field';
 import { State } from './components/State'
+import { Engine } from './data/Engine';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      complexity: 0,
       mode: DEFAULT_MODE,
       field: new Field(),
       turn: DEFAULT_START_TURN,
       size: MIN_FEILD_SIZE,
-      rowSize: MIN_FEILD_SIZE
+      rowSize: MIN_FEILD_SIZE,
+      engine: new Engine()
     }
 
     this.onComplexityChanged = this.onComplexityChanged.bind(this);
@@ -45,7 +46,7 @@ class App extends Component {
    * @param {Number} complexity 
    */
   onComplexityChanged(e, complexity) {
-    this.setState({complexity});
+    this.setState({engine: this.state.engine.updateComplexity(complexity)});
   }
 
   /**
@@ -102,7 +103,7 @@ class App extends Component {
       <div className="App">
         <Header 
           className='App-header'
-          complexity={this.state.complexity} 
+          complexity={this.state.engine.getComplexityId()} 
           mode={this.state.mode}
           size={this.state.size}
           disabled={!this.state.field.isClear()}
