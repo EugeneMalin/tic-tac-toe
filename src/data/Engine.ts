@@ -25,12 +25,12 @@ export class Engine implements IStrategy {
         return this;
     }
 
-    getPoint(field: Field): PointVector {
+    getPoint(field: Field, player: string): PointVector {
         if (!this._complexity.strategy) {
-            throw(new Error('Стратегия не установлена!'))
+            throw(new Error('Стратегия поведения не установлена!'));
         }
 
-        return this._complexity.strategy?.getPoint(field);
+        return this._complexity.strategy?.getPoint(field, player);
     }
     
     static getComplexities(): IComplexity[] {

@@ -8,7 +8,7 @@ export interface IStrategy {
      * Получение "хода" стратегией
      * @param field ссылка на игровое поле
      */
-    getPoint(field: Field): PointVector
+    getPoint(field: Field, type: string): PointVector
 }
 
-export type PointVector = [number, number, number];
+export type PointVector = [number, number, string];

@@ -24,7 +24,9 @@ const COLORS = {
 }
 
 export class Point {
-    constructor(type = 'empty', state = 'empty') {
+    constructor(x, y, type = 'empty', state = 'empty') {
+        this.x = x;
+        this.y = y;
         this.type = type;
         this.state = state;
     }

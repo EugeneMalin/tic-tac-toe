@@ -29,7 +29,7 @@ export class Field {
         for (let i = 0; i < size; i++) {
             const row = []
             for (let j = 0; j < size; j++) {
-                row.push(new Point());
+                row.push(new Point(j, i));
             }
             this.points.push(row)
         }
@@ -69,6 +69,12 @@ export class Field {
      */
     map(callback) {
         return this.points.map(callback);
+    }
+
+    each(callback) {
+        return this.points.forEach((row) => {
+            row.forEach(callback);
+        });
     }
 
     /**
