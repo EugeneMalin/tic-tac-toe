@@ -27,7 +27,7 @@ export function Header(props) {
                 onRowSizeChanged={props.onRowSizeChanged}
             />
             <Mode
-                disabled={true || props.disabled}
+                disabled={props.disabled}
                 className="Header-mode"
                 mode={props.mode}
                 onModeChanged={props.onModeChanged}
