@@ -2,8 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
-import { DEFAULT_MODE, MIN_FEILD_SIZE, DEFAULT_START_TURN,
-         CIRCLE_PLAYER } from './Const';
+import { DEFAULT_MODE, MIN_FEILD_SIZE } from './Const';
 import { Field } from './data/Field';
 import { State } from './components/State'
 import { Engine } from './data/Engine';
@@ -14,7 +13,6 @@ class App extends Component {
     this.state = {
       mode: DEFAULT_MODE,
       field: new Field(),
-      turn: DEFAULT_START_TURN,
       size: MIN_FEILD_SIZE,
       rowSize: MIN_FEILD_SIZE,
       engine: new Engine()
@@ -67,8 +65,7 @@ class App extends Component {
   onPointClicked(e, x, y) {
     try {
       this.setState({
-        turn: this.state.turn === DEFAULT_START_TURN ? CIRCLE_PLAYER : DEFAULT_START_TURN,
-        field: this.state.field.update(x, y, this.state.turn)
+        field: this.state.field.update(x, y)
       })
     } catch(e) {
       console.error(e);
@@ -80,8 +77,7 @@ class App extends Component {
    */
   onResetClicked() {
     this.setState({
-      field: new Field(this.state.size, this.state.rowSize),
-      turn: DEFAULT_START_TURN
+      field: new Field(this.state.size, this.state.rowSize)
     })
   }
 
@@ -117,7 +113,6 @@ class App extends Component {
           <State
             className='App-state'
             field={this.state.field}
-            turn={this.state.turn}
             onResetClicked={this.onResetClicked}
           />
           <GameField

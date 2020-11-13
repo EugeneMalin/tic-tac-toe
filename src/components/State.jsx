@@ -18,7 +18,7 @@ export function State(props) {
         } else {
             status.push('Game is running');
         }
-        status.push(`there is ${props.turn} turn`)
+        status.push(`there is ${props.field.turn} turn`)
     }
 
     return <div className='State'>

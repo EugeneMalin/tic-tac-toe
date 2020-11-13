@@ -2,7 +2,7 @@
  * Класс для хранения и обработки состояния игрового поля
  */
 
-import { MIN_FEILD_SIZE } from "../Const";
+import { CIRCLE_PLAYER, DEFAULT_START_TURN, MIN_FEILD_SIZE } from "../Const";
 import { Point } from "./Point"
 
 /**
@@ -25,6 +25,7 @@ export class Field {
         this.freeCount = size * size
         this.winLine = null;
         this.rowSize = rowSize;
+        this.turn = DEFAULT_START_TURN;
 
         for (let i = 0; i < size; i++) {
             const row = []
@@ -84,7 +85,7 @@ export class Field {
      * @param {String} type active player
      * @returns {Field}
      */
-    update(x, y, type) {
+    update(x, y) {
         const point = this.points[x][y];
 
         if (!point.isClickable()) {
@@ -92,7 +93,7 @@ export class Field {
         }
 
         point.state = 'default';
-        point.type = type;
+        point.type = this.turn;
 
         this.freeCount--;
 
@@ -105,6 +106,9 @@ export class Field {
                 this.points[pointer[0]][pointer[1]].state = 'active'
             })
         }
+        
+        this.turn = this.turn === DEFAULT_START_TURN ? CIRCLE_PLAYER : DEFAULT_START_TURN;
+
         return this;
     }
 
