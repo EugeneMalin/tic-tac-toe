@@ -1,7 +1,5 @@
 import { IComplexity } from "./data/interface/IComplexity";
 import { IFieldSize } from "./data/interface/IFieldSize";
-import { Medium } from "./data/strategy/Medium";
-import { Strong } from "./data/strategy/Strong";
 import { Weak } from "./data/strategy/Weak";
 
 export const ITEM_HEIGHT = 48;
