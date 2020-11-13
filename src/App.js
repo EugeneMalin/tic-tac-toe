@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
-import { DEFAULT_COMPLEXITY, DEFAULT_MODE, MIN_FEILD_SIZE, DEFAULT_START_TURN,
+import { DEFAULT_MODE, MIN_FEILD_SIZE, DEFAULT_START_TURN,
          CIRCLE_PLAYER } from './Const';
 import { Field } from './data/Field';
 import { State } from './components/State'
@@ -11,7 +11,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      complexity: DEFAULT_COMPLEXITY,
+      complexity: 0,
       mode: DEFAULT_MODE,
       field: new Field(),
       turn: DEFAULT_START_TURN,
