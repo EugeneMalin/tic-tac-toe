@@ -1,9 +1,8 @@
+import { Field } from "../Field";
+
 /**
- * Интерфейс для работы с AI
+ * Интерфейс элемента автоматического или удаленного элемента
  */
-
- import { Field } from "../Field";
-
 export interface IStrategy {
     /**
      * Получение "хода" стратегией
