@@ -11,14 +11,14 @@ export function State(props) {
     
     if (!props.field.isActive()) {
         status.push('Game ends')
-        status.push(props.field.winType ? `the ${props.field.winType} wins!` : 'there is dead heat')
+        status.push(props.field.winner ? `the ${props.field.winner.name} wins!` : 'there is dead heat')
     } else {
         if (props.field.isClear()) {
             status.push('Game starts');
         } else {
             status.push('Game is running');
         }
-        status.push(`there is ${props.field.turn} turn`)
+        status.push(`there is ${props.player.name} turn`)
     }
 
     return <div className='State'>

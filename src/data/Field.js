@@ -2,7 +2,7 @@
  * Класс для хранения и обработки состояния игрового поля
  */
 
-import { CIRCLE_PLAYER_ID, DEFAULT_START_TURN, MIN_FEILD_SIZE } from "../Const";
+import { MIN_FEILD_SIZE } from "../Const";
 import { Point } from "./Point"
 
 /**
@@ -23,10 +23,8 @@ export class Field {
     constructor(size = MIN_FEILD_SIZE, rowSize = MIN_FEILD_SIZE) {
         this.points = [];
         this.freeCount = size * size
-        this.winLine = null;
         this.size = size;
         this.rowSize = rowSize;
-        this.turn = DEFAULT_START_TURN;
 
         for (let i = 0; i < size; i++) {
             const row = []
@@ -48,7 +46,7 @@ export class Field {
      * Проверка что есть победитель
      */
     hasWinner() {
-        return !!this.winLine
+        return !!this.winner
     }
 
     /**
@@ -90,30 +88,25 @@ export class Field {
      * @param {String} type active player
      * @returns {Field}
      */
-    update(x, y) {
+    update(x, y, player) {
         const point = this.points[x][y];
 
         if (!point.isClickable()) {
             throw new Error('Клетка уже использована');
         }
 
-        point.state = 'default';
-        point.type = this.turn;
+        point.putPlayer(player)
 
         this.freeCount--;
 
         const [hasWin, winLine] = this._extractWin(x, y);
 
         if (hasWin) {
-            this.winLine = winLine;
-            this.winType = point.type;
+            this.winner = point.player;
             winLine.forEach((pointer) => {
                 this.points[pointer[0]][pointer[1]].state = 'active'
             })
         }
-        
-        this.turn = this.turn === DEFAULT_START_TURN ? CIRCLE_PLAYER_ID : DEFAULT_START_TURN;
-
         return this;
     }
 
@@ -155,7 +148,7 @@ export class Field {
             }
 
             const pointCur = this.points[newX] && this.points[newX][newY]
-            if (pointCur && pointCur.type === point.type) {
+            if (pointCur && !pointCur.isClickable() && pointCur.getId() === point.getId()) {
                 pointsCount++;
                 winLine.push([newX, newY])
             } else {

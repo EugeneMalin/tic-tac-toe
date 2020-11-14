@@ -1,6 +1,9 @@
 import { IComplexity } from "./data/interface/IComplexity";
 import { IFieldSize } from "./data/interface/IFieldSize";
+import { Player } from "./data/Player";
 import { Weak } from "./data/strategy/Weak";
+import { CropFree, Clear, RadioButtonUnchecked } from "@material-ui/icons";
+import { PlayersQueue } from "./data/PlayersQueue";
 
 export const ITEM_HEIGHT = 48;
 
@@ -32,18 +35,25 @@ export const COMPLEXITY_LEVELS: IComplexity[] = [
 
 export const MIN_FEILD_SIZE = 3;
 export const MAX_FIELD_SIZE = 15;
-
-export const CROSS_PLAYER_ID = 'cross';
-export const CIRCLE_PLAYER_ID = 'circle';
-export const DEFAULT_START_TURN = CROSS_PLAYER_ID;
-
+export const EMPTY_POINT_ICON = CropFree;
 export const MULTI_MODE = 'multi';
 export const SINGLE_MODE = 'single';
 
+export enum PLAYER_TYPE {
+    PHYSICAL,
+    AI,
+    REMOTE
+}
+
+export const DEFAULT_PLAYERS = new PlayersQueue([
+    new Player(0, 'cross', Clear, PLAYER_TYPE.PHYSICAL),
+    new Player(1, 'circle', RadioButtonUnchecked, PLAYER_TYPE.PHYSICAL)
+])
+
 export const GAME_MODES = [{
-    name: SINGLE_MODE
+    name: SINGLE_MODE,
 }, {
-    name: MULTI_MODE
+    name: MULTI_MODE,
 }]
 
 export const FIELD_SIZE: IFieldSize[] = [];
