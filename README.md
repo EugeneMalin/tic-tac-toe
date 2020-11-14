@@ -1,13 +1,14 @@
 # TIC TAC TOE
 
-Simple realization of tic-tac-toe game using React. [Check on Heroku](https://eugenes-tic-tac-toe.herokuapp.com/)
+Simple realization of tic-tac-toe game using React. Check on [Heroku](https://eugenes-tic-tac-toe.herokuapp.com/).
 
 ## TODO
 
 * реализовать выбор игрока
-* реализовать простой AI на рандоме для low
+* добавление модульных тестов
 * реализовать AI для взвешенного поля для mid(будет совершать правильные ходы 50\50) и high
 * реализовать таблицу рекордов локально
+* реализовать удаленную игру между пользователями
 
 ## Available Scripts
 
@@ -45,11 +46,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
