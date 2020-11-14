@@ -2,7 +2,7 @@
  * Класс для хранения и обработки состояния игрового поля
  */
 
-import { CIRCLE_PLAYER, DEFAULT_START_TURN, MIN_FEILD_SIZE } from "../Const";
+import { CIRCLE_PLAYER_ID, DEFAULT_START_TURN, MIN_FEILD_SIZE } from "../Const";
 import { Point } from "./Point"
 
 /**
@@ -112,7 +112,7 @@ export class Field {
             })
         }
         
-        this.turn = this.turn === DEFAULT_START_TURN ? CIRCLE_PLAYER : DEFAULT_START_TURN;
+        this.turn = this.turn === DEFAULT_START_TURN ? CIRCLE_PLAYER_ID : DEFAULT_START_TURN;
 
         return this;
     }

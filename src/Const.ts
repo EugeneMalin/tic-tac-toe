@@ -8,7 +8,7 @@ export const ITEM_PADDING_TOP = 8;
 
 export const DEFAULT_MODE = 'multi';
 
-export const DEFAULT_COMPLEXITY ={
+export const DEFAULT_COMPLEXITY = {
     name: 'low',
     id: 0,
     strategy: new Weak()
@@ -33,9 +33,9 @@ export const COMPLEXITY_LEVELS: IComplexity[] = [
 export const MIN_FEILD_SIZE = 3;
 export const MAX_FIELD_SIZE = 15;
 
-export const CROSS_PLAYER = 'cross';
-export const CIRCLE_PLAYER = 'circle';
-export const DEFAULT_START_TURN = CROSS_PLAYER;
+export const CROSS_PLAYER_ID = 'cross';
+export const CIRCLE_PLAYER_ID = 'circle';
+export const DEFAULT_START_TURN = CROSS_PLAYER_ID;
 
 export const MULTI_MODE = 'multi';
 export const SINGLE_MODE = 'single';

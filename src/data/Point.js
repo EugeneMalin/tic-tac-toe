@@ -3,15 +3,15 @@
  */
 
 import { Clear, CropFree, RadioButtonUnchecked } from "@material-ui/icons";
-import { CIRCLE_PLAYER, CROSS_PLAYER } from "../Const";
+import { CIRCLE_PLAYER_ID, CROSS_PLAYER_ID } from "../Const";
 
 /**
  * Иконки для отображения игроков
  */
 const ICONS = {
     empty: <CropFree/>,
-    [CROSS_PLAYER]: <Clear/>,
-    [CIRCLE_PLAYER]: <RadioButtonUnchecked/>
+    [CROSS_PLAYER_ID]: <Clear/>,
+    [CIRCLE_PLAYER_ID]: <RadioButtonUnchecked/>
 }
 
 /**

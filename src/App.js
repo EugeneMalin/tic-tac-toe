@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
-import { CIRCLE_PLAYER, DEFAULT_MODE, SINGLE_MODE } from './Const';
+import { CIRCLE_PLAYER_ID, DEFAULT_MODE, SINGLE_MODE } from './Const';
 import { Field } from './data/Field';
 import { State } from './components/State'
 import { Engine } from './data/Engine';
@@ -13,7 +13,8 @@ class App extends Component {
     this.state = {
       mode: DEFAULT_MODE,
       field: new Field(),
-      engine: new Engine()
+      engine: new Engine(),
+      players: {}
     }
 
     this.onComplexityChanged = this.onComplexityChanged.bind(this);
@@ -26,7 +27,7 @@ class App extends Component {
 
   componentDidUpdate() {
     const {field, engine} = this.state;
-    if (this.state.mode === SINGLE_MODE && field.turn === CIRCLE_PLAYER && field.isActive()) {
+    if (this.state.mode === SINGLE_MODE && field.turn === CIRCLE_PLAYER_ID && field.isActive()) {
       try {
         this.setState({
           field: field.update(...engine.getPoint(field))
