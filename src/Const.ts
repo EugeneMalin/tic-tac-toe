@@ -50,6 +50,11 @@ export const DEFAULT_PLAYERS = new PlayersQueue([
     new Player(1, 'circle', RadioButtonUnchecked, PLAYER_TYPE.PHYSICAL)
 ])
 
+export const DEFAULT_PLAYERS_WITH_AI = new PlayersQueue([
+    new Player(0, 'cross', Clear, PLAYER_TYPE.PHYSICAL),
+    new Player(1, 'circle', RadioButtonUnchecked, PLAYER_TYPE.AI)
+])
+
 export const GAME_MODES = [{
     name: SINGLE_MODE,
 }, {

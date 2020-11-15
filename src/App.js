@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
-import { DEFAULT_MODE, DEFAULT_PLAYERS } from './Const';
+import { DEFAULT_MODE, DEFAULT_PLAYERS, DEFAULT_PLAYERS_WITH_AI, MULTI_MODE } from './Const';
 import { Field } from './data/Field';
 import { State } from './components/State'
 import { Engine } from './data/Engine';
@@ -30,7 +30,7 @@ class App extends Component {
     if (players.getCurrent().isAuto() && field.isActive()) {
       try {
         this.setState({
-          field: field.update(...engine.getPoint(field))
+          field: field.update(...engine.getPoint(field), this.state.players.getActive())
         });
       } catch(e) {
         console.error(e);
@@ -64,7 +64,10 @@ class App extends Component {
    * @param {Number} mode 
    */
   onModeChanged(e, mode) {
-    this.setState({mode});
+    this.setState({
+      mode,
+      players: mode === MULTI_MODE ? DEFAULT_PLAYERS : DEFAULT_PLAYERS_WITH_AI
+    });
   }
 
   /**
@@ -88,7 +91,8 @@ class App extends Component {
    */
   onResetClicked() {
     this.setState({
-      field: new Field(this.state.field.size, this.state.field.rowSize)
+      field: new Field(this.state.field.size, this.state.field.rowSize),
+      players: this.state.mode === MULTI_MODE ? DEFAULT_PLAYERS : DEFAULT_PLAYERS_WITH_AI
     })
   }
 
