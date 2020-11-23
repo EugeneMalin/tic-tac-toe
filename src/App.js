@@ -23,12 +23,17 @@ class App extends Component {
     this.onResetClicked = this.onResetClicked.bind(this);
     this.onSizeChanged = this.onSizeChanged.bind(this);
     this.onRowSizeChanged = this.onRowSizeChanged.bind(this);
+    this.onStartClicked = this.onStartClicked.bind(this);
+    this.onStopClicked = this.onStopClicked.bind(this);
   }
 
   componentDidUpdate() {
     const {field, engine, players} = this.state;
-    if (players.getCurrent().isAuto() && field.isActive()) {
+    if (players.getCurrent().isAuto()) {
       try {
+        if (field.isFull() || players.hasWinner()) {
+          throw(new Error('Игра уже завершилась!'))
+        }
         this.setState({
           field: field.update(...engine.getPoint(field), this.state.players.getActive())
         });
@@ -96,6 +101,22 @@ class App extends Component {
     })
   }
 
+  onStartClicked() {
+    const field = this.state.field;
+    field.start();
+    this.setState({
+      field
+    })
+  }
+
+  onStopClicked() {
+    const field = this.state.field;
+    field.stop();
+    this.setState({
+      field
+    })
+  }
+
   /**
    * Handler for size changing
    * @param {Event} e 
@@ -126,12 +147,17 @@ class App extends Component {
         <body className='App-body'>
           <State
             className='App-state'
-            field={this.state.field}
+            active={!this.state.field.isFull() || this.state.players.hasWinner()}
+            clear={this.state.field.isClear()}
+            winner={this.state.players.getWinner()}
             player={this.state.players.getActive()}
-            onResetClicked={this.onResetClicked}
           />
           <GameField
+            avaliable={this.state.field.isFull() || this.state.players.hasWinner()}
+            start={this.state.field.isClear()}
             field={this.state.field}
+            onStartClicked={this.onStartClicked}
+            onRestartClicked={this.onStartClicked}
             onPointClicked={this.onPointClicked}
           />
         </body>

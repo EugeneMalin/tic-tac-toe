@@ -14,6 +14,13 @@ export class PlayersQueue {
     }
 
     /**
+     * Получение победителя, если он есть
+     */
+    getWinner(): Player | undefined {
+        return this._players.find(player => player.isWinner()); 
+    }
+
+    /**
      * Получение активного пользователя, помещает выданного участника в конец списка
      */
     getActive(): Player {

@@ -8,6 +8,7 @@ export class Player {
     private _id: number;
     private _icon: typeof SvgIcon;
     private _type: PLAYER_TYPE;
+    private _isWinner: boolean = false;
 
     name: string;
 
@@ -18,7 +19,15 @@ export class Player {
         this._type = type;
     }
 
-    getIcon() {
+    mark(): void {
+        this._isWinner = true;
+    }
+
+    isWinner(): boolean {
+        return this._isWinner;
+    }
+
+    getIcon(): typeof SvgIcon {
         return this._icon;
     }
 

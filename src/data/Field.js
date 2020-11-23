@@ -36,20 +36,6 @@ export class Field {
     }
 
     /**
-     * Проверка что игровое поле активно: нет победителя и есть свободные ходы
-     */
-    isActive() {
-        return !this.isFull() && !this.hasWinner()
-    }
-
-    /**
-     * Проверка что есть победитель
-     */
-    hasWinner() {
-        return !!this.winner
-    }
-
-    /**
      * Проверка что на поле еще есть место для хода
      */
     isFull() {
@@ -102,7 +88,7 @@ export class Field {
         const [hasWin, winLine] = this._extractWin(x, y);
 
         if (hasWin) {
-            this.winner = point.player;
+            point.player.mark();
             winLine.forEach((pointer) => {
                 this.points[pointer[0]][pointer[1]].state = 'active'
             })

@@ -9,8 +9,8 @@ import { Point } from "../Point";
  
 export class Weak implements IStrategy {
     getPoint(field: Field): PointVector {
-        if (!field.isActive()) {
-            throw(new Error('Игра уже завершилась!'))
+        if (!field.isFull()) {
+            throw(new Error('Нет свободного места для хода!'))
         }
         const points: Point[] = [];
         field.each((item: Point) => {
