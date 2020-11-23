@@ -2,15 +2,19 @@
  * Unit display component
  */
 
-import { Icon } from "@material-ui/core";
+import { Button, Icon, IconButton } from "@material-ui/core";
 
 export function Point(props) {
     return (
-        <Icon
-            className={props.className}
-            fontSize='large'
+        <IconButton
             onClick={(e) => props.onClick(e)}
-            color={props.color}
-        >{props.icon}</Icon>
+            fontSize='large'
+        >
+            <Icon
+                className={props.className}
+                fontSize='large'
+                color={props.color}
+            >{props.icon}</Icon>
+        </IconButton>
     )
 }
