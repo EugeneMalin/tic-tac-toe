@@ -10,7 +10,7 @@ export class PlayersQueue {
         if (players.length < 2) {
             throw(new Error('Набор игроков должен содержать минимум 2-х!'))
         }
-        this._players = players;
+        this._players = [...players];
     }
 
     /**

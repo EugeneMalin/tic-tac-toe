@@ -23,7 +23,7 @@ class App extends Component {
 
   componentDidUpdate() {
     const {game} = this.state;
-    if (!game.isEnds() && game.isSelfTurn()) {
+    if (game.isActive() && game.isSelfTurn()) {
       try {
         this.setState({
           game: game.selfTurn()
