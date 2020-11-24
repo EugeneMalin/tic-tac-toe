@@ -2,19 +2,17 @@ import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
-import { DEFAULT_MODE, DEFAULT_PLAYERS, DEFAULT_PLAYERS_WITH_AI, MULTI_MODE } from './Const';
+import { DEFAULT_PLAYERS, DEFAULT_PLAYERS_WITH_AI, MULTI_MODE } from './Const';
 import { Field } from './data/Field';
 import { State } from './components/State'
 import { Engine } from './data/Engine';
+import { Game } from './data/Game';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      mode: DEFAULT_MODE,
-      field: new Field(),
-      engine: new Engine(),
-      players: DEFAULT_PLAYERS
+      game: new Game(new Field(), new Engine())
     }
 
     this.onComplexityChanged = this.onComplexityChanged.bind(this);
@@ -24,18 +22,14 @@ class App extends Component {
     this.onSizeChanged = this.onSizeChanged.bind(this);
     this.onRowSizeChanged = this.onRowSizeChanged.bind(this);
     this.onStartClicked = this.onStartClicked.bind(this);
-    this.onStopClicked = this.onStopClicked.bind(this);
   }
 
   componentDidUpdate() {
-    const {field, engine, players} = this.state;
-    if (players.getCurrent().isAuto()) {
+    const {game} = this.state;
+    if (!game.isEnds() && game.isSelfTurn()) {
       try {
-        if (field.isFull() || players.getWinner()) {
-          throw(new Error('Игра уже завершилась!'))
-        }
         this.setState({
-          field: field.update(...engine.getPoint(field), this.state.players.getActive())
+          game: game.selfTurn()
         });
       } catch(e) {
         console.error(e);
@@ -50,7 +44,7 @@ class App extends Component {
    */
   onRowSizeChanged(e, rowSize) {
     this.setState({
-      field: new Field(this.state.field.size, rowSize)
+      game: this.state.game.updateField({rowSize})
     })
   }
 
@@ -60,7 +54,7 @@ class App extends Component {
    * @param {Number} complexity 
    */
   onComplexityChanged(e, complexity) {
-    this.setState({engine: this.state.engine.updateComplexity(complexity)});
+    this.setState({game: this.state.game.updateComplexity(complexity)});
   }
 
   /**
@@ -69,10 +63,7 @@ class App extends Component {
    * @param {Number} mode 
    */
   onModeChanged(e, mode) {
-    this.setState({
-      mode,
-      players: mode === MULTI_MODE ? DEFAULT_PLAYERS : DEFAULT_PLAYERS_WITH_AI
-    });
+    this.setState({game: this.state.game.updateMode(mode)});
   }
 
   /**
@@ -84,7 +75,7 @@ class App extends Component {
   onPointClicked(e, x, y) {
     try {
       this.setState({
-        field: this.state.field.update(x, y, this.state.players.getActive())
+        field: this.state.game.turn(x, y)
       })
     } catch(e) {
       console.error(e);
@@ -96,22 +87,13 @@ class App extends Component {
    */
   onResetClicked() {
     this.setState({
-      field: new Field(this.state.field.size, this.state.field.rowSize),
-      players: this.state.mode === MULTI_MODE ? DEFAULT_PLAYERS : DEFAULT_PLAYERS_WITH_AI
+      game: this.state.game.restart()
     })
   }
 
   onStartClicked() {
-    const field = this.state.field;
     this.setState({
-      field
-    })
-  }
-
-  onStopClicked() {
-    const field = this.state.field;
-    this.setState({
-      field
+      game: this.state.game.start()
     })
   }
 
@@ -123,20 +105,22 @@ class App extends Component {
    */
   onSizeChanged(e, size, rowSize) {
     this.setState({
-      field: new Field(size, rowSize)
+      game: this.state.game.updateField({size, rowSize})
     });
   }
 
   render() {
+    const {game} = this.state;
     return (
       <div className="App">
         <Header 
           className='App-header'
-          mode={this.state.mode}
-          size={this.state.field.size}
-          rowSize={this.state.field.rowSize}
-          complexity={this.state.engine.getComplexityId()} 
-          disabled={!this.state.field.isClear()}
+          mode={game.getMode()}
+          size={game.getFieldSize()}
+          rowSize={game.getFieldRowSize()}
+          complexity={game.getComplexity()} 
+          disabled={game.isActive()}
+
           onSizeChanged={this.onSizeChanged}
           onRowSizeChanged={this.onRowSizeChanged}
           onComplexityChanged={this.onComplexityChanged}
@@ -145,15 +129,15 @@ class App extends Component {
         <body className='App-body'>
           <State
             className='App-state'
-            active={!this.state.field.isFull() || this.state.players.getWinner()}
-            clear={this.state.field.isClear()}
-            winner={this.state.players.getWinner()}
-            player={this.state.players.getActive()}
+            active={game.isActive()}
+            clear={game.isStarts()}
+            winner={game.getWinnerPlayer()}
+            player={game.getCurrentPlayer()}
           />
           <GameField
-            avaliable={!this.state.field.isFull() && !this.state.players.getWinner()}
-            start={this.state.field.isClear()}
-            field={this.state.field}
+            available={game.isActive()}
+            start={game.isStarts()}
+            field={game.getField()}
             onStartClicked={this.onStartClicked}
             onRestartClicked={this.onStartClicked}
             onPointClicked={this.onPointClicked}

@@ -1,6 +1,5 @@
 import { IFlags } from "../interface/IFlags";
 import { IState } from "../interface/IState";
-import { Player } from "../Player";
 
 /**
  * Базовое сотояние

@@ -1,6 +1,5 @@
 import { IFlags } from "../interface/IFlags";
 import { IState } from "../interface/IState";
-import { Player } from "../Player";
 import { BaseState } from "./Base";
 import { PlayerTurn } from "./PlayerTurn";
 
