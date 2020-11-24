@@ -31,7 +31,7 @@ class App extends Component {
     const {field, engine, players} = this.state;
     if (players.getCurrent().isAuto()) {
       try {
-        if (field.isFull() || players.hasWinner()) {
+        if (field.isFull() || players.getWinner()) {
           throw(new Error('Игра уже завершилась!'))
         }
         this.setState({
@@ -103,7 +103,6 @@ class App extends Component {
 
   onStartClicked() {
     const field = this.state.field;
-    field.start();
     this.setState({
       field
     })
@@ -111,7 +110,6 @@ class App extends Component {
 
   onStopClicked() {
     const field = this.state.field;
-    field.stop();
     this.setState({
       field
     })
@@ -147,13 +145,13 @@ class App extends Component {
         <body className='App-body'>
           <State
             className='App-state'
-            active={!this.state.field.isFull() || this.state.players.hasWinner()}
+            active={!this.state.field.isFull() || this.state.players.getWinner()}
             clear={this.state.field.isClear()}
             winner={this.state.players.getWinner()}
             player={this.state.players.getActive()}
           />
           <GameField
-            avaliable={this.state.field.isFull() || this.state.players.hasWinner()}
+            avaliable={!this.state.field.isFull() && !this.state.players.getWinner()}
             start={this.state.field.isClear()}
             field={this.state.field}
             onStartClicked={this.onStartClicked}

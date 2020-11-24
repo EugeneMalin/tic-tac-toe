@@ -5,6 +5,7 @@
 import { Point } from "./Point"
 import './GameField.css'
 import { Button } from "@material-ui/core"
+import { Loop } from "@material-ui/icons"
 
 export function GameField(props) {
     return (<div className={`GameField ${props.className}`}>
@@ -27,7 +28,7 @@ export function GameField(props) {
             null
         }
         {
-            !props.available ? 
+            !props.start && !props.available ? 
             <div className="GameField-overfull">
                 <Button onClick={() => props.onRestartClicked()} color="default" startIcon={<Loop/>} variant="contained">Restart</Button>
             </div>:
