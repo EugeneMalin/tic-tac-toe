@@ -2,7 +2,7 @@
  * Unit display component
  */
 
-import { Button, Icon, IconButton } from "@material-ui/core";
+import { Icon, IconButton } from "@material-ui/core";
 
 export function Point(props) {
     return (
