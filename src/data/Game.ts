@@ -67,8 +67,8 @@ export class Game {
         return this;
     }
 
-    updateField(params: {size: number, rowSize: number} = {size: this._field.size, rowSize: this._field.rowSize}): Game {
-        this._field = new Field(params.size, params.rowSize);
+    updateField(params: {size?: number, rowSize?: number}): Game {
+        this._field = new Field(params.size || this._field.size, params.rowSize || this._field.rowSize);
         return this;
     }
 

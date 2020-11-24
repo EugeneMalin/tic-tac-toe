@@ -23,7 +23,7 @@ export function Header(props) {
                 disabled={props.disabled}
                 className="Header-rowSize"
                 size={props.size}
-                rowSize={props.rowSize}
+                rowSize={props.rowsize}
                 onRowSizeChanged={props.onRowSizeChanged}
             />
             <Mode

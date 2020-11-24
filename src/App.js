@@ -19,6 +19,7 @@ class App extends Component {
     this.onSizeChanged = this.onSizeChanged.bind(this);
     this.onRowSizeChanged = this.onRowSizeChanged.bind(this);
     this.onStartClicked = this.onStartClicked.bind(this);
+    this.onStopClicked = this.onStopClicked.bind(this);
   }
 
   componentDidUpdate() {
@@ -94,6 +95,12 @@ class App extends Component {
     })
   }
 
+  onStopClicked() {
+    this.setState({
+      game: this.state.game.refresh()
+    })
+  }
+
   /**
    * Handler for size changing
    * @param {Event} e 
@@ -114,7 +121,7 @@ class App extends Component {
           className='App-header'
           mode={game.getMode()}
           size={game.getFieldSize()}
-          rowSize={game.getFieldRowSize()}
+          rowsize={game.getFieldRowSize()}
           complexity={game.getComplexity()} 
           disabled={game.isActive()}
 
@@ -135,6 +142,7 @@ class App extends Component {
             available={game.isActive()}
             start={game.isStarts()}
             field={game.getField()}
+            onStopClicked={this.onStopClicked}
             onStartClicked={this.onStartClicked}
             onRestartClicked={this.onResetClicked}
             onPointClicked={this.onPointClicked}
