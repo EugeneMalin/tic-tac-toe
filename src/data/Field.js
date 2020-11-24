@@ -72,7 +72,7 @@ export class Field {
      * @param {Number} x horizontal position
      * @param {Number} y vertical position
      * @param {String} type active player
-     * @returns {Field}
+     * @returns {{hasWin: boolean, winLine: number[]}}
      */
     update(x, y, player) {
         const point = this.points[x][y];
@@ -93,7 +93,7 @@ export class Field {
                 this.points[pointer[0]][pointer[1]].state = 'active'
             })
         }
-        return this;
+        return {hasWin, winLine};
     }
 
     /**

@@ -18,7 +18,7 @@ export class Game {
     private _state: IState;
     private _mode: string;
 
-    constructor(field: Field, engine: Engine) {
+    constructor(field: Field = new Field(), engine: Engine = new Engine()) {
         this._field = field;
         this._engine = engine;
         this._players = DEFAULT_PLAYERS;
@@ -44,8 +44,14 @@ export class Game {
     }
 
     turn(x: number, y: number): Game {
-        this._field.update(x, y, this._players.getActive());
-        //todo add state change handlers
+        const {hasWin} = this._field.update(x, y, this._players.getCurrent());
+        this._state = this._state.getNext({
+            win: hasWin,
+            fullField: this._field.isFull()
+        });
+        if (!this.isEnds()) {
+            this._players.next();
+        }
         return this;
     }
 
@@ -57,6 +63,7 @@ export class Game {
     restart(): Game {
         this._field = new Field(this._field.size, this._field.rowSize);
         this._players = this._mode === MULTI_MODE ? DEFAULT_PLAYERS : DEFAULT_PLAYERS_WITH_AI;
+        this._state = new StartState()
         return this;
     }
 

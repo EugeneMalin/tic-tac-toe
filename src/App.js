@@ -2,17 +2,14 @@ import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
-import { DEFAULT_PLAYERS, DEFAULT_PLAYERS_WITH_AI, MULTI_MODE } from './Const';
-import { Field } from './data/Field';
 import { State } from './components/State'
-import { Engine } from './data/Engine';
 import { Game } from './data/Game';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      game: new Game(new Field(), new Engine())
+      game: new Game()
     }
 
     this.onComplexityChanged = this.onComplexityChanged.bind(this);
@@ -129,7 +126,7 @@ class App extends Component {
         <body className='App-body'>
           <State
             className='App-state'
-            active={game.isActive()}
+            active={!game.isEnds()}
             clear={game.isStarts()}
             winner={game.getWinnerPlayer()}
             player={game.getCurrentPlayer()}
@@ -139,7 +136,7 @@ class App extends Component {
             start={game.isStarts()}
             field={game.getField()}
             onStartClicked={this.onStartClicked}
-            onRestartClicked={this.onStartClicked}
+            onRestartClicked={this.onResetClicked}
             onPointClicked={this.onPointClicked}
           />
         </body>
