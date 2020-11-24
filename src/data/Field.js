@@ -1,24 +1,10 @@
-/**
- * Класс для хранения и обработки состояния игрового поля
- */
-
 import { MIN_FEILD_SIZE } from "../Const";
+import { Analyzer } from "./Analyzer";
 import { Point } from "./Point"
 
 /**
- * Количество направлений для проверки
- * 
- * пример обработки на минимальном размере
- *                     0   1     2
- *          N          +   +   +
- *        NW NE          + + +
- *      W       E      * * % + + 3
- *        SW SE          * * *
- *          S          *   *   *
- * % - это точка соответствующая х и у, относительно которых идет проверка
+ * Класс для хранения и обработки состояния игрового поля
  */
-const DIRECTIONS_COUNT = 4;
-
 export class Field {
     constructor(size = MIN_FEILD_SIZE, rowSize = MIN_FEILD_SIZE) {
         this.points = [];
@@ -85,7 +71,7 @@ export class Field {
 
         this.freeCount--;
 
-        const [hasWin, winLine] = this._extractWin(x, y);
+        const {hasWin, winLine} = this._extractWin(x, y);
 
         if (hasWin) {
             point.player.mark();
@@ -102,70 +88,10 @@ export class Field {
      * @param {Number} y vertical position
      */
     _extractWin(x, y) {
-        let [hasWinLine, winLine] = [false, []];
-
-        for (let dir = 0; dir < DIRECTIONS_COUNT; dir++) {
-            if (hasWinLine) {
-                continue
-            }
-            [hasWinLine, winLine] = this._extractWinFromLine(x, y, dir);
-        }
-        return [hasWinLine, winLine];
-    }
-
-    /**
-     * Extracting win from directed line
-     * @param {Number} x horizontal position
-     * @param {Number} y vertical position
-     * @param {Number} direction direction identifier
-     */
-    _extractWinFromLine(x, y, direction) {
-        const point = this.points[x][y];
-        
-        let pointsCount = 0;
-        let winLine = [];
-        for (let step = - this.rowSize + 1; step < this.rowSize; step++) {
-            const [directionX, directionY] = this._extractdirectionVector(direction)
-            const newX = x - directionX * step;
-            const newY = y - directionY * step;
-
-            if (pointsCount > this.rowSize - 1) {
-                continue;
-            }
-
-            const pointCur = this.points[newX] && this.points[newX][newY]
-            if (pointCur && !pointCur.isClickable() && pointCur.getId() === point.getId()) {
-                pointsCount++;
-                winLine.push([newX, newY])
-            } else {
-                pointsCount = 0;
-                winLine = []
-            }
-        }
-        return [pointsCount > this.rowSize - 1, winLine];
-    }
-
-    /**
-     * Get unit vector for direction
-     * 
-     * direction | x | y
-     *     0     | + | +
-     *     1     | 0 | +
-     *     2     | - | +
-     *     3     | - | 0
-     *     4     | - | -
-     *     5     | 0 | -
-     *     6     | + | -
-     *     7     | + | 0
-     * 
-     * @param {Number} direction direction key
-     */
-    _extractdirectionVector(direction) {
-        return [
-            (direction === 0 || direction === 6 || direction === 7 ?
-                1 : (direction === 1 || direction === 5 ? 0 : -1)),
-            (direction === 0 || direction === 1 || direction === 2 ? 
-                1 : (direction === 3 || direction === 7 ? 0 : -1))
-        ]
+        return Analyzer.isWinPoint(x, y, {
+            size: this.size,
+            rowSize: this.rowSize,
+            points: this.points
+        });
     }
 }

@@ -4,6 +4,7 @@ import { Player } from "./data/Player";
 import { Weak } from "./data/strategy/Weak";
 import { CropFree, Clear, RadioButtonUnchecked } from "@material-ui/icons";
 import { PlayersQueue } from "./data/PlayersQueue";
+import { Medium } from "./data/strategy/Medium";
 
 export const ITEM_HEIGHT = 48;
 
@@ -21,7 +22,7 @@ export const COMPLEXITY_LEVELS: IComplexity[] = [
     DEFAULT_COMPLEXITY, {
         name: 'medium',
         id: 1,
-        strategy: undefined
+        strategy: new Medium()
     }, {
         name: 'high',
         id: 2,
