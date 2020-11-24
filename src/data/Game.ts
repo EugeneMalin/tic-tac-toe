@@ -60,7 +60,7 @@ export class Game {
         return this;
     }
 
-    restart(): Game {
+    refresh(): Game {
         this._field = new Field(this._field.size, this._field.rowSize);
         this._players = this._mode === MULTI_MODE ? DEFAULT_PLAYERS : DEFAULT_PLAYERS_WITH_AI;
         this._state = new StartState()

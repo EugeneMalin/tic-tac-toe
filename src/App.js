@@ -84,7 +84,7 @@ class App extends Component {
    */
   onResetClicked() {
     this.setState({
-      game: this.state.game.restart()
+      game: this.state.game.refresh().start()
     })
   }
 
