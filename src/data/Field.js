@@ -88,7 +88,7 @@ export class Field {
      * @param {Number} y vertical position
      */
     _extractWin(x, y) {
-        return Analyzer.isWinPoint(x, y, {
+        return Analyzer.getWinStatus(x, y, {
             size: this.size,
             rowSize: this.rowSize,
             points: this.points
