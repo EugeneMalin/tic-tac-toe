@@ -27,10 +27,6 @@ export const COMPLEXITY_LEVELS: IComplexity[] = [
         name: 'high',
         id: 2,
         strategy: undefined
-    }, {
-        name: 'high',
-        id: 3,
-        strategy: undefined
     }
 ]
 
