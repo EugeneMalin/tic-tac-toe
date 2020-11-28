@@ -10,6 +10,12 @@ import { Size } from "./Size";
 import { RowSize } from "./RowSize";
 
 export function Header(props) {
+    const complexity = props.mode === MULTI_MODE ? null : <Complexity
+        disabled={props.disabled}
+        className="Header-complexity"
+        complexity={props.complexity} 
+        onComplexityChanged={props.onComplexityChanged}
+    />
     return (
         <header className={`Header ${props.className}`}>
             <h1 className="Header-title">TIC TAC TOE</h1>
@@ -23,7 +29,7 @@ export function Header(props) {
                 disabled={props.disabled}
                 className="Header-rowSize"
                 size={props.size}
-                rowSize={props.rowsize}
+                rowsize={props.rowsize}
                 onRowSizeChanged={props.onRowSizeChanged}
             />
             <Mode
@@ -32,12 +38,7 @@ export function Header(props) {
                 mode={props.mode}
                 onModeChanged={props.onModeChanged}
             />
-            <Complexity
-                disabled={props.mode === MULTI_MODE || props.disabled}
-                className="Header-complexity"
-                complexity={props.complexity} 
-                onComplexityChanged={props.onComplexityChanged}
-            />
+            {complexity}
         </header>
     )
 }

@@ -9,7 +9,7 @@ const MenuProps = {
     PaperProps: {
         style: {
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
+            width: 80,
         }
     }
 };
@@ -23,11 +23,11 @@ export function RowSize(props) {
                 id="rowSize"
                 className="RowSize-value"
                 onChange={(e, item) => {
-                    props.onRowSizeChanged(e, item.props.value, item.props.rowSize)
+                    props.onRowSizeChanged(e, item.props.value, item.props.rowsize)
                 }}
                 MenuProps={MenuProps}
                 input={<Input />}
-                value={props.rowSize || MIN_FEILD_SIZE}
+                value={props.rowsize || MIN_FEILD_SIZE}
             >
                 {FIELD_ROW_SIZE.slice(0, props.size - MIN_FEILD_SIZE + 1).map((value) => (
                     <MenuItem key={value} value={value}>
