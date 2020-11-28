@@ -1,0 +1,18 @@
+.PlayerSelect {
+    display: flex;
+    flex-direction: column;
+}
+
+.PlayerSelect-item {
+    display: flex;
+    margin: 4px 0;
+}
+
+.PlayerSelect-name {
+    width: 70px;
+}
+
+.PlayerSelect-setting {
+    display: flex;
+    align-items: center;
+}

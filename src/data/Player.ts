@@ -19,8 +19,20 @@ export class Player {
         this._type = type;
     }
 
+    setType(type: PLAYER_TYPE): void {
+        this._type = type;
+    }
+
+    onAI(): void {
+        this.setType(PLAYER_TYPE.AI);
+    }
+
     mark(): void {
         this._isWinner = true;
+    }
+
+    unmark(): void {
+        this._isWinner = false;
     }
 
     isWinner(): boolean {

@@ -1,4 +1,4 @@
-import { DEFAULT_MODE, DEFAULT_PLAYERS, DEFAULT_PLAYERS_WITH_AI, MULTI_MODE } from "../Const";
+import { DEFAULT_MODE, DEFAULT_PLAYERS, MULTI_MODE, PLAYER_TYPE } from "../Const";
 import { Engine } from "./Engine";
 import { Field } from "./Field";
 import { IState } from "./interface/IState";
@@ -24,6 +24,15 @@ export class Game {
         this._players = DEFAULT_PLAYERS;
         this._state = new StartState();
         this._mode = DEFAULT_MODE;
+    }
+
+    updatePlayers(players: Player[]): Game {
+        this._players = new PlayersQueue(players);
+        return this;
+    }
+
+    getPlayers(): Player[] {
+        return this._players.getItems();
     }
 
     isStarts(): boolean {
@@ -62,8 +71,8 @@ export class Game {
 
     refresh(): Game {
         this._field = new Field(this._field.size, this._field.rowSize);
-        this._players = this._mode === MULTI_MODE ? DEFAULT_PLAYERS : DEFAULT_PLAYERS_WITH_AI;
         this._state = new StartState()
+        this._players.refresh();
         return this;
     }
 
@@ -78,7 +87,12 @@ export class Game {
     }
 
     updateMode(mode: string): Game {
-        this._players = mode === MULTI_MODE ? DEFAULT_PLAYERS : DEFAULT_PLAYERS_WITH_AI;
+        if (mode === MULTI_MODE) {
+            this._players.getItems().forEach(item => item.setType(PLAYER_TYPE.PHYSICAL));
+        } else {
+            this._players.onAI();
+        }
+        
         this._mode = mode;
         return this;
     }

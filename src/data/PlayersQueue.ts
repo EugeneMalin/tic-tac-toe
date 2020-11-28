@@ -13,6 +13,25 @@ export class PlayersQueue {
         this._players = [...players];
     }
 
+    onAI(): void {
+        this._players.forEach((player, index) => {
+            if (index) {
+                player.onAI();
+            }
+        })
+    }
+
+    refresh(): void {
+        this._players.forEach(player => player.unmark());
+    }
+
+    /**
+     * Получение списка игроков
+     */
+    getItems(): Player[] {
+        return this._players.slice();
+    }
+
     /**
      * Получение победителя, если он есть
      */
