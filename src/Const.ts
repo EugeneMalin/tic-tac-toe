@@ -32,10 +32,11 @@ export const COMPLEXITY_LEVELS: IComplexity[] = [
 ]
 
 export const MIN_FEILD_SIZE = 3;
-export const MAX_FIELD_SIZE = 15;
+export const MAX_FIELD_SIZE = 10;
 export const EMPTY_POINT_ICON = CropFree;
 export const MULTI_MODE = 'multi';
 export const SINGLE_MODE = 'single';
+export const SELF_TURN_DELAY = 0.75 * 1000;
 
 export enum PLAYER_TYPE {
     PHYSICAL,

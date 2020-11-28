@@ -4,7 +4,7 @@ import { GameField } from './components/GameField';
 import { Header } from './components/Header';
 import { PlayerSelect } from './components/PlayerSelect';
 import { State } from './components/State'
-import { MULTI_MODE } from './Const';
+import { MULTI_MODE, SELF_TURN_DELAY } from './Const';
 import { Game } from './data/Game';
 
 class App extends Component {
@@ -29,9 +29,11 @@ class App extends Component {
     const {game} = this.state;
     if (game.isActive() && game.isSelfTurn()) {
       try {
-        this.setState({
-          game: game.selfTurn()
-        });
+        setTimeout(() => {
+          this.setState({
+            game: game.selfTurn()
+          });
+        }, SELF_TURN_DELAY);
       } catch(e) {
         console.error(e);
       }
@@ -74,6 +76,9 @@ class App extends Component {
    * @param {Number} y vertical position
    */
   onPointClicked(e, x, y) {
+    if (this.state.game.isSelfTurn()) {
+      return;
+    }
     try {
       this.setState({
         field: this.state.game.turn(x, y)
