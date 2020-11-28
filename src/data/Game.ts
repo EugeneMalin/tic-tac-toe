@@ -39,7 +39,7 @@ export class Game {
     }
 
     selfTurn(): Game {
-        this.turn(...this._engine.getPoint(this._field));
+        this.turn(...this._engine.getPoint(this._players.getCurrent(), this._field));
         return this;
     }
 

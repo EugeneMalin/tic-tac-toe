@@ -2,6 +2,7 @@ import { COMPLEXITY_LEVELS, DEFAULT_COMPLEXITY } from "../Const";
 import { Field } from "./Field";
 import { IComplexity } from "./interface/IComplexity";
 import { IStrategy, PointVector } from "./interface/IStratery";
+import { Player } from "./Player";
 
 /**
  * Класс обертка над AI, AI представляют собой стратегии работающие на основе игрового поля
@@ -25,12 +26,12 @@ export class Engine implements IStrategy {
         return this;
     }
 
-    getPoint(field: Field): PointVector {
+    getPoint(player: Player, field: Field): PointVector {
         if (!this._complexity.strategy) {
             throw(new Error('Стратегия поведения не установлена!'));
         }
 
-        return this._complexity.strategy?.getPoint(field);
+        return this._complexity.strategy?.getPoint(player, field);
     }
     
     static getComplexities(): IComplexity[] {

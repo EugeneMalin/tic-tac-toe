@@ -1,5 +1,4 @@
 import { IWinStatus } from './interface/IWinStatus';
-import { IAttackStatus } from './interface/IAttackStatus';
 import {IFieldParams} from './interface/IFieldParams';
 import { Player } from './Player';
 import { ICheckedPoint } from './interface/ICheckedPoint';
@@ -40,25 +39,52 @@ export class Analyzer {
      * @param params параметры поля
      */
     static getAttackPoints(player: Player, params: IFieldParams): ICheckedPoint[] {
-        // todo нужно реализовать обход всех точек с вызовом _checkAttackLineFor
-        return [];
+        const result: ICheckedPoint[] = []
+        params.points.forEach((row) => {
+            row.forEach((point) => {
+                if (point.player) {
+                    return;
+                }
+                const weight = this._getPointWeignt(point.x, point.y, player.getId(), params);
+                if (weight > 0) {
+                    result.push({
+                        x: point.x,
+                        y: point.y,
+                        level: weight
+                    });
+                }
+            }) 
+        })
+        return result;
     }
 
     /**
-     * Проверка точки по заданному направлению на возможность атаки
+     * Получение веса точки для указанного пользователя
      * @param x положение проверяемой точки по X
      * @param y положение проверяемой точки по У
      * @param direction направление проверки
      * @param params параметры поля
      */
-    static _checkAttackLineFor(x: number, y: number, direction: number, params: IFieldParams): IAttackStatus {
-        // todo проверка идентичная проверке на победу только для точке которые принадлежат игроку
-        // взвешиваются все точки и вес определяется сколькими суммой всего суммой от 1/n где n 
-        // количество точек необходимое для победы по заданному направлению
-        return {
-            hasAttack: false,
-            attackPoints: []
+    private static _getPointWeignt(x: number, y: number, id: number, params: IFieldParams): number {        
+        const weights: number[] = [];
+        const halfRowSize = Math.round(params.rowSize / 2)
+        for (let dir = 0; dir < DIRECTIONS_COUNT; dir++) {
+            let lineWeight = 0;
+            let lineUnreachablePoints = 0;
+            for (let step = - halfRowSize; step < halfRowSize + 1; step++) {
+                const [directionX, directionY] = this._extractdirectionVector(dir)
+                const newX = x - directionX * step;
+                const newY = y - directionY * step;
+
+                const pointCur = params.points[newX] && params.points[newX][newY]
+                if (pointCur && !pointCur.isClickable() && pointCur.getId() === id) {
+                    lineWeight++;
+                }
+            }
+            weights.push(lineWeight - lineUnreachablePoints);
         }
+
+        return Math.max(...weights);
     }
 
     /**

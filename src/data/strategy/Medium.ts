@@ -2,24 +2,25 @@
  * AI второго уровня анализирует поле, но ходит не самым эффективным образом
  */
 
+import { Analyzer } from "../Analyzer";
 import { Field } from "../Field";
 import { IStrategy, PointVector } from "../interface/IStratery";
-import { Point } from "../Point";
+import { Player } from "../Player";
+import { Weak } from "./Weak";
  
-export class Medium implements IStrategy {
-    getPoint(field: Field): PointVector {
-        if (field.isFull()) {
-            throw(new Error('Нет свободного места для хода!'))
+export class Medium extends Weak implements IStrategy {
+    getPoint(player: Player, field: Field): PointVector {
+        const attackPoints = Analyzer.getAttackPoints(player, {
+            size: field.size,
+            rowSize: field.rowSize,
+            points: field.points
+        }).sort((pointA, pointB) => pointB.level - pointA.level);
+
+        if (attackPoints.length > 0) {
+            return [attackPoints[0].x, attackPoints[0].y];
         }
-        const points: Point[] = [];
-        field.each((item: Point) => {
-            if (item.isClickable()) {
-                points.push(item);
-            }
-        });
+        
+        return super.getPoint(player, field);
 
-        const point: Point = points[Math.floor(Math.random() * points.length)];
-
-        return [point.x, point.y];
     }
 }

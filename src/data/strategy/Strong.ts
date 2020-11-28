@@ -4,9 +4,10 @@
 
 import { Field } from "../Field";
 import { IStrategy, PointVector } from "../interface/IStratery";
+import { Player } from "../Player";
  
 export class Strong implements IStrategy {
-    getPoint(field: Field): PointVector {
+    getPoint(player: Player, field: Field): PointVector {
         throw('Unimplemented')
     }
 }
