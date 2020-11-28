@@ -1,5 +1,10 @@
 .GameField {
     display: flex;
+    flex-direction: column;
+}
+
+.GameField-field {
+    display: flex;
     position: relative;
 }
 
@@ -25,4 +30,11 @@
     margin: 4px;
     align-items: center;
     justify-content: center;
+}
+
+.GameField-bottomActions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4px;
 }

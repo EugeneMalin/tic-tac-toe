@@ -11,3 +11,14 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.App-gameField {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-players {
+  margin: 8px;
+}

@@ -2,7 +2,9 @@ import { Component } from 'react';
 import './App.css';
 import { GameField } from './components/GameField';
 import { Header } from './components/Header';
+import { PlayerSelect } from './components/PlayerSelect';
 import { State } from './components/State'
+import { MULTI_MODE } from './Const';
 import { Game } from './data/Game';
 
 class App extends Component {
@@ -20,6 +22,7 @@ class App extends Component {
     this.onRowSizeChanged = this.onRowSizeChanged.bind(this);
     this.onStartClicked = this.onStartClicked.bind(this);
     this.onStopClicked = this.onStopClicked.bind(this);
+    this.onPlayersUpdated = this.onPlayersUpdated.bind(this);
   }
 
   componentDidUpdate() {
@@ -113,8 +116,19 @@ class App extends Component {
     });
   }
 
+  onPlayersUpdated(players) {
+    this.setState({
+      game: this.state.game.updatePlayers(players)
+    })
+  }
+
   render() {
     const {game} = this.state;
+    const players = game.getMode() !== MULTI_MODE && !game.isActive() ? <PlayerSelect
+              className="App-players"
+              players={game.getPlayers()}
+              onPlayersUpdated={this.onPlayersUpdated}
+            /> : null;
     return (
       <div className="App">
         <Header 
@@ -138,15 +152,18 @@ class App extends Component {
             winner={game.getWinnerPlayer()}
             player={game.getCurrentPlayer()}
           />
-          <GameField
-            available={game.isActive()}
-            start={game.isStarts()}
-            field={game.getField()}
-            onStopClicked={this.onStopClicked}
-            onStartClicked={this.onStartClicked}
-            onRestartClicked={this.onResetClicked}
-            onPointClicked={this.onPointClicked}
-          />
+          <div className='App-gameField'>
+            <GameField
+              available={game.isActive()}
+              start={game.isStarts()}
+              field={game.getField()}
+              onStopClicked={this.onStopClicked}
+              onStartClicked={this.onStartClicked}
+              onRestartClicked={this.onResetClicked}
+              onPointClicked={this.onPointClicked}
+            />
+            {players}
+          </div>
         </body>
         
         <footer className='App-footer'>
