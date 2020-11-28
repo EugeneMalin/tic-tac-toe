@@ -55,17 +55,43 @@ export class Analyzer {
                 }
             }) 
         })
-        return result;
+        return result.sort((pointA, pointB) => pointB.level - pointA.level);
+    }
+
+    /**
+     * Получение точек для обороны
+     * @param player игрок
+     * @param params параметры поля
+     */
+    static getDefeatPoints(player: Player, params: IFieldParams): ICheckedPoint[] {
+        const result: ICheckedPoint[] = []
+        params.points.forEach((row) => {
+            row.forEach((point) => {
+                if (point.player) {
+                    return;
+                }
+                const weight = this._getPointWeignt(point.x, point.y, player.getId(), params, false);
+                if (weight > 0) {
+                    result.push({
+                        x: point.x,
+                        y: point.y,
+                        level: weight
+                    });
+                }
+            }) 
+        })
+        return result.sort((pointA, pointB) => pointB.level - pointA.level);
     }
 
     /**
      * Получение веса точки для указанного пользователя
      * @param x положение проверяемой точки по X
      * @param y положение проверяемой точки по У
-     * @param direction направление проверки
+     * @param id идентификатор пользователя
      * @param params параметры поля
+     * @param isUsers признак проверки относительно пользователя
      */
-    private static _getPointWeignt(x: number, y: number, id: number, params: IFieldParams): number {        
+    private static _getPointWeignt(x: number, y: number, id: number, params: IFieldParams, isUsers: boolean = true): number {        
         const weights: number[] = [];
         const halfRowSize = Math.round(params.rowSize / 2)
         for (let dir = 0; dir < DIRECTIONS_COUNT; dir++) {
@@ -77,7 +103,7 @@ export class Analyzer {
                 const newY = y - directionY * step;
 
                 const pointCur = params.points[newX] && params.points[newX][newY]
-                if (pointCur && !pointCur.isClickable() && pointCur.getId() === id) {
+                if (pointCur && !pointCur.isClickable() && (isUsers ? pointCur.getId() === id : pointCur.getId() !== id)) {
                     lineWeight++;
                 }
             }

@@ -14,12 +14,12 @@ export class Medium extends Weak implements IStrategy {
             size: field.size,
             rowSize: field.rowSize,
             points: field.points
-        }).sort((pointA, pointB) => pointB.level - pointA.level);
+        });
 
         if (attackPoints.length > 0) {
             return [attackPoints[0].x, attackPoints[0].y];
         }
-        
+
         return super.getPoint(player, field);
 
     }
