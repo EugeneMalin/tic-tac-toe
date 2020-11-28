@@ -22,8 +22,9 @@ export class Strong extends Weak implements IStrategy {
         });
 
         if (defeatPoints.length > 0 && attackPoints.length > 0) {
-            // Защита нужна сильнее
-            if (defeatPoints[0].level >= attackPoints[0].level) {
+            // Защита нужна сильнее и нет возможности победить в один ход
+            if (defeatPoints[0].level >= attackPoints[0].level && 
+                attackPoints[0].level < (field.rowSize - 1)) {
                 return [defeatPoints[0].x, defeatPoints[0].y];
             }
             return [attackPoints[0].x, attackPoints[0].y];
