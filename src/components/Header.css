@@ -7,9 +7,15 @@
     margin-right: 12px;
 }
 
-.Header .Header-mode,
-.Header .Header-complexity,
-.Header .Header-size,
-.Header .Header-rowSize {
-    margin: 0 6px;
+.Header-settings {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80%;
+}
+
+.Header-mode,
+.Header-complexity,
+.Header-size,
+.Header-rowSize {
+    margin: 6px;
 }
