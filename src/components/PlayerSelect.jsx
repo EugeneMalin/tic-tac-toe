@@ -2,6 +2,10 @@ import { Button, Radio } from '@material-ui/core';
 import { PLAYER_TYPE } from '../Const';
 import './PlayerSelect.css';
 
+/**
+ * Player chooser and config master
+ * @param props 
+ */
 export function PlayerSelect(props) {
     const players = props.players.map((player, index) => {
         const Icon = player.getIcon();

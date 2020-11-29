@@ -1,9 +1,8 @@
+import './State.css'
+
 /**
  * Game state display
  */
-
-import './State.css'
-
 export function State(props) {
     const status = [];
     

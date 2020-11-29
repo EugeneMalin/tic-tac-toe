@@ -1,7 +1,3 @@
-/**
- * Complexity setting component
- */
-
 import { ITEM_HEIGHT, ITEM_PADDING_TOP } from "../Const";
 import { Input, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 import { Engine } from "../data/Engine";
@@ -15,6 +11,9 @@ const MenuProps = {
     }
 };
 
+/**
+ * Complexity setting component
+ */
 export function Complexity(props) {
     return (
         <FormControl disabled={props.disabled} className={`Complexity ${props.className}`}>

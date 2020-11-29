@@ -1,9 +1,8 @@
+import { Icon, IconButton } from "@material-ui/core";
+
 /**
  * Unit display component
  */
-
-import { Icon, IconButton } from "@material-ui/core";
-
 export function Point(props) {
     return (
         <IconButton

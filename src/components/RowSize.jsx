@@ -1,7 +1,3 @@
-/**
- * Win line rowSize setting for field
- */
-
 import { FIELD_ROW_SIZE, ITEM_HEIGHT, ITEM_PADDING_TOP, MIN_FEILD_SIZE } from "../Const";
 import { Input, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 
@@ -14,6 +10,9 @@ const MenuProps = {
     }
 };
 
+/**
+ * Win line count setting for field
+ */
 export function RowSize(props) {
     return (
         <FormControl disabled={props.disabled || (!(props.size - MIN_FEILD_SIZE))} className={`RowSize ${props.className}`}>

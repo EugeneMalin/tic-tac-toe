@@ -1,7 +1,3 @@
-/**
- * Game field display component
- */
-
 import { Point } from "./Point"
 import './GameField.css'
 import { Button } from "@material-ui/core"
@@ -9,6 +5,9 @@ import { Loop } from "@material-ui/icons"
 import PanToolIcon from '@material-ui/icons/PanTool';
 import { IconButton } from '@material-ui/core';
 
+/**
+ * Game field display component
+ */
 export function GameField(props) {
     const overfull = props.start || (!props.start && !props.available) ? <div className="GameField-overfull"></div> : null;
     const start = props.start ? <Button onClick={() => props.onStartClicked()} color="primary" variant="contained">Start</Button> : null;

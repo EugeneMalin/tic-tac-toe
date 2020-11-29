@@ -6,16 +6,3 @@
 .Header-title {
     margin-right: 12px;
 }
-
-.Header-settings {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 80%;
-}
-
-.Header-mode,
-.Header-complexity,
-.Header-size,
-.Header-rowSize {
-    margin: 6px;
-}

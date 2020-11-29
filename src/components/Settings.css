@@ -1,0 +1,13 @@
+
+.Settings {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80%;
+}
+
+.Settings-mode,
+.Settings-complexity,
+.Settings-size,
+.Settings-rowSize {
+    margin: 6px;
+}

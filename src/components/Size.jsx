@@ -1,7 +1,3 @@
-/**
- * Game field size setting component
- */
-
 import { FIELD_SIZE, ITEM_HEIGHT, ITEM_PADDING_TOP, MIN_FEILD_SIZE } from "../Const";
 import { Input, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 
@@ -14,6 +10,9 @@ const MenuProps = {
     }
 };
 
+/**
+ * Game field size setting component
+ */
 export function Size(props) {
     return (
         <FormControl disabled={props.disabled} className={`Size ${props.className}`}>

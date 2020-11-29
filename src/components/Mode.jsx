@@ -1,7 +1,3 @@
-/**
- * Mode settings component
- */
-
 import { DEFAULT_MODE, GAME_MODES, ITEM_HEIGHT, ITEM_PADDING_TOP } from "../Const";
 import { Input, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 
@@ -14,6 +10,9 @@ const MenuProps = {
     }
 };
 
+/**
+ * Mode settings component
+ */
 export function Mode(props) {
     return (
         <FormControl disabled={props.disabled} className={`Mode ${props.className}`}>
