@@ -3,9 +3,11 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import TuneIcon from '@material-ui/icons/Tune';
 import { useState } from "react";
 import { Settings } from "./Settings";
+import {IHeader} from './interface/IHeader'
 
 /**
  * Application header component
+ * @param {IHeader} props component options
  */
 export function Header(props) {
     const [open, setOpen] = useState(false);
@@ -26,6 +28,7 @@ export function Header(props) {
                         disabled={props.disabled}
                         size={props.size}
                         rowsize={props.rowsize}
+                        mode={props.mode}
                         complexity={props.complexity}
                         onSizeChanged={props.onSizeChanged}
                         onRowSizeChanged={props.onRowSizeChanged}

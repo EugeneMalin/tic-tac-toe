@@ -1,13 +1,14 @@
 import { Button, Radio } from '@material-ui/core';
 import { PLAYER_TYPE } from '../Const';
 import './PlayerSelect.css';
+import {IPlayerSelect} from './interface/IPlayerSelect';
 
 /**
  * Player chooser and config master
- * @param props 
+ * @param {IPlayerSelect} props 
  */
 export function PlayerSelect(props) {
-    const players = props.players.map((player, index) => {
+    const players = props.players.map((player) => {
         const Icon = player.getIcon();
         return (<div className='PlayerSelect-item' key={player.getId()}>
                     <Button variant="outlined" color={`${player.isWinner() ? 'secondary' : 'primary'}`}>

@@ -1,7 +1,9 @@
-import './State.css'
+import './State.css';
+import {IState} from './interface/IState';
 
 /**
  * Game state display
+ * @param {IState} props component options
  */
 export function State(props) {
     const status = [];

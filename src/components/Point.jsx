@@ -1,7 +1,9 @@
 import { Icon, IconButton } from "@material-ui/core";
+import {IPoint} from './interface/IPoint';
 
 /**
  * Unit display component
+ * @param {IPoint} props component options
  */
 export function Point(props) {
     return (

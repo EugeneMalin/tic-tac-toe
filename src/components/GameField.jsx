@@ -4,9 +4,11 @@ import { Button } from "@material-ui/core"
 import { Loop } from "@material-ui/icons"
 import PanToolIcon from '@material-ui/icons/PanTool';
 import { IconButton } from '@material-ui/core';
+import {IGameField} from './interface/IGameField'
 
 /**
  * Game field display component
+ * @param {IGameField} props component options
  */
 export function GameField(props) {
     const overfull = props.start || (!props.start && !props.available) ? <div className="GameField-overfull"></div> : null;

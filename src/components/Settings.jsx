@@ -4,10 +4,11 @@ import { Size } from "./Size";
 import { RowSize } from "./RowSize";
 import { Complexity } from "./Complexity";
 import { Mode } from "./Mode";
+import {ISettings} from './interface/ISettings';
 
 /**
  * Game settings component
- * @param props 
+ * @param {ISettings} props component options
  */
 export function Settings(props) {
     const complexity = props.mode === MULTI_MODE ? null : <Complexity
