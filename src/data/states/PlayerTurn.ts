@@ -5,7 +5,7 @@ import { EndState } from "./End";
 import { WinState } from "./Win";
 
 /**
- * Состояние игры
+ * Temporary state of player turn
  */
 export class PlayerTurn extends BaseState implements IState {
 

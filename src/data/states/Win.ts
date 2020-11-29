@@ -3,7 +3,7 @@ import { IState } from "../interface/IState";
 import { BaseState } from "./Base";
 
 /**
- * Состояние победы
+ * Win of game State
  */
 export class WinState extends BaseState implements IState {
     getNext(flags: IFlags): IState {

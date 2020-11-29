@@ -1,5 +1,5 @@
 /**
- * Интерфейс элемента настроек размера поля
+ * Field base settings
  */
 export interface IFieldSize {
     value: number;

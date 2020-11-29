@@ -5,7 +5,7 @@ import { IStrategy, PointVector } from "./interface/IStratery";
 import { Player } from "./Player";
 
 /**
- * Класс обертка над AI, AI представляют собой стратегии работающие на основе игрового поля
+ * Wrapper of AI strategies
  */
 export class Engine implements IStrategy {
     private _complexity: IComplexity;
@@ -14,10 +14,17 @@ export class Engine implements IStrategy {
         this._complexity = COMPLEXITY_LEVELS.find(item => item.id === key) || DEFAULT_COMPLEXITY;
     }
 
+    /**
+     * Getting current complexity level
+     */
     getComplexityId(): number {
         return this._complexity.id;
     }
 
+    /**
+     * Updating the current complexity
+     * @param key complexity level
+     */
     updateComplexity(key: number): Engine {
         const newComplexity = COMPLEXITY_LEVELS.find(item => item.id === key);
         if (newComplexity) {
@@ -26,6 +33,11 @@ export class Engine implements IStrategy {
         return this;
     }
 
+    /**
+     * Getting the turn from player
+     * @param player current player
+     * @param field field
+     */
     getPoint(player: Player, field: Field): PointVector {
         if (!this._complexity.strategy) {
             throw(new Error('Стратегия поведения не установлена!'));
@@ -34,6 +46,9 @@ export class Engine implements IStrategy {
         return this._complexity.strategy?.getPoint(player, field);
     }
     
+    /**
+     * Getting avaliable complexity levels
+     */
     static getComplexities(): IComplexity[] {
         return COMPLEXITY_LEVELS.filter(item => !!item.strategy);
     }

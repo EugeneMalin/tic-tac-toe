@@ -8,6 +8,10 @@ import { IStrategy, PointVector } from "../interface/IStratery";
 import { Player } from "../Player";
 import { Point } from "../Point";
  
+
+/**
+ * Interface of random turn player
+ */
 export class Weak implements IStrategy {
     getPoint(player: Player, field: Field): PointVector {
         if (field.isFull()) {

@@ -4,7 +4,7 @@ import { BaseState } from "./Base";
 import { PlayerTurn } from "./PlayerTurn";
 
 /**
- * Начальное сотояние
+ * Start of game state
  */
 export class StartState extends BaseState implements IState {
 

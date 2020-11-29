@@ -1,9 +1,8 @@
 import { Point } from "../Point";
 
 /**
- * Описание характеристик поля
+ * Field options interface
  */
-
 export interface IFieldParams {
     rowSize: number;
     size: number;

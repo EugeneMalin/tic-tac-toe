@@ -1,7 +1,7 @@
 import { IStrategy } from "./IStratery";
 
 /**
- * Интерфейс элемента настроек сложности
+ * Complexity change options
  */
 export interface IComplexity {
     id: number;

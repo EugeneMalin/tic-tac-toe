@@ -4,20 +4,26 @@ import { Player } from './Player';
 import { ICheckedPoint } from './interface/ICheckedPoint';
 
 /**
- * Количество направлений для проверки
+ * Number of directions
  * 
- * пример обработки на минимальном размере
+ * example of minimum size handling
  *                     0   1     2
  *          N          +   +   +
  *        NW NE          + + +
  *      W       E      * * % + + 3
  *        SW SE          * * *
  *          S          *   *   *
- * % - это точка соответствующая х и у, относительно которых идет проверка
+ * % - selected point
  */
 const DIRECTIONS_COUNT = 4;
 
 export class Analyzer {
+    /**
+     * Getting the win status of field
+     * @param x position x
+     * @param y position y
+     * @param params field
+     */
     static getWinStatus(x: number, y: number, params: IFieldParams): IWinStatus  {
         let hasWin = false;
         let winLine: number[][] = [];
@@ -34,9 +40,9 @@ export class Analyzer {
     }
 
     /**
-     * Получение точки для атаки
-     * @param player игрок для которого ищем атаку 
-     * @param params параметры поля
+     * Getting the attack points
+     * @param player attack player
+     * @param params field
      */
     static getAttackPoints(player: Player, params: IFieldParams): ICheckedPoint[] {
         const result: ICheckedPoint[] = []
@@ -59,9 +65,9 @@ export class Analyzer {
     }
 
     /**
-     * Получение точек для обороны
-     * @param player игрок
-     * @param params параметры поля
+     * Defeat points
+     * @param player defeat player
+     * @param params field
      */
     static getDefeatPoints(player: Player, params: IFieldParams): ICheckedPoint[] {
         const result: ICheckedPoint[] = []
@@ -84,12 +90,12 @@ export class Analyzer {
     }
 
     /**
-     * Получение веса точки для указанного пользователя
-     * @param x положение проверяемой точки по X
-     * @param y положение проверяемой точки по У
-     * @param id идентификатор пользователя
-     * @param params параметры поля
-     * @param isUsers признак проверки относительно пользователя
+     * Getting the point weight
+     * @param x position x
+     * @param y position y
+     * @param id player identifier
+     * @param params field
+     * @param isUsers dirrection of field check
      */
     private static _getPointWeignt(x: number, y: number, id: number, params: IFieldParams, isUsers: boolean = true): number {        
         const weights: number[] = [];
@@ -138,11 +144,11 @@ export class Analyzer {
     }
     
     /**
-     * Проверка хода на победность для указанной линии
-     * @param x позиция по Х
-     * @param y позиция по У
-     * @param direction направлеие проверки
-     * @param params прочие параметры игрового поля
+     * Getting the win status of point in line
+     * @param x position x
+     * @param y position y
+     * @param direction dirrection of check
+     * @param params field
      */
     private static _checkWinLineFor(x: number, y: number, direction: number, params: IFieldParams): IWinStatus {
         const point = params.points[x][y];

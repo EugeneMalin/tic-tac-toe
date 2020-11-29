@@ -2,12 +2,12 @@ import { Field } from "../Field";
 import { Player } from "../Player";
 
 /**
- * Интерфейс элемента автоматического или удаленного элемента
+ * Interface for getting point of field
  */
 export interface IStrategy {
     /**
-     * Получение "хода" стратегией
-     * @param field ссылка на игровое поле
+     * Getting the point
+     * @param field 
      */
     getPoint(player: Player, field: Field): PointVector
 }

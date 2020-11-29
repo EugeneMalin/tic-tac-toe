@@ -1,13 +1,12 @@
-/**
- * AI второго уровня анализирует поле, но ходит не самым эффективным образом
- */
-
 import { Analyzer } from "../Analyzer";
 import { Field } from "../Field";
 import { IStrategy, PointVector } from "../interface/IStratery";
 import { Player } from "../Player";
 import { Weak } from "./Weak";
  
+/**
+ * Medium level AI prefers to attack
+ */
 export class Medium extends Weak implements IStrategy {
     getPoint(player: Player, field: Field): PointVector {
         const attackPoints = Analyzer.getAttackPoints(player, {

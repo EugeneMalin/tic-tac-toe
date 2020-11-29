@@ -1,8 +1,13 @@
 /**
- * Интерфейс базового сотояния получаемого о поле
- * Позволяет получить данные о победе
+ * Interface of win status
  */
 export interface IWinStatus {
+    /**
+     * Sing of winner
+     */
     hasWin: boolean;
+    /**
+     * Win line on field
+     */
     winLine?: number[][];
 }

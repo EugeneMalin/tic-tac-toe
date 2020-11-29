@@ -2,7 +2,7 @@ import { Player } from "../Player";
 import { IBasePoint } from "./IBasePoint";
 
 /**
- * Интерфейс характеристик точки на игровом поле
+ * Point options interface
  */
 export interface IPoint extends IBasePoint {
     player: Player;

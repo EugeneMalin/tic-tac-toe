@@ -2,7 +2,7 @@ import { IState } from "../interface/IState";
 import { BaseState } from "./Base";
 
 /**
- * Конечное состояние
+ * End of game state
  */
 export class EndState extends BaseState implements IState {
     getNext(): IState {

@@ -2,7 +2,7 @@ import { IFlags } from "../interface/IFlags";
 import { IState } from "../interface/IState";
 
 /**
- * Базовое сотояние
+ * Base game state
  */
 export class BaseState implements IState {
     protected _flags: IFlags | null = null;

@@ -1,13 +1,12 @@
-/**
- * AI третьего уровня, ходит только правльными клетками
- */
-
 import { Analyzer } from "../Analyzer";
 import { Field } from "../Field";
 import { IStrategy, PointVector } from "../interface/IStratery";
 import { Player } from "../Player";
 import { Weak } from "./Weak";
- 
+
+/**
+ * Strong level AI prefers defeat
+ */
 export class Strong extends Weak implements IStrategy {
     getPoint(player: Player, field: Field): PointVector {
         const defeatPoints = Analyzer.getDefeatPoints(player, {
@@ -22,7 +21,7 @@ export class Strong extends Weak implements IStrategy {
         });
 
         if (defeatPoints.length > 0 && attackPoints.length > 0) {
-            // Защита нужна сильнее и нет возможности победить в один ход
+            // strongly needs to defeat and has no ability to win
             if (defeatPoints[0].level >= attackPoints[0].level && 
                 attackPoints[0].level < (field.rowSize - 1)) {
                 return [defeatPoints[0].x, defeatPoints[0].y];
