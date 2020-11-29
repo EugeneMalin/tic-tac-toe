@@ -1,6 +1,6 @@
 import { FIELD_ROW_SIZE, ITEM_HEIGHT, ITEM_PADDING_TOP, MIN_FEILD_SIZE } from "../Const";
 import { Input, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
-
+import { IRowSize } from "./interface/IRowSize"
 const MenuProps = {
     PaperProps: {
         style: {
@@ -12,6 +12,7 @@ const MenuProps = {
 
 /**
  * Win line count setting for field
+ * @param {IRowSize} props component options
  */
 export function RowSize(props) {
     return (
@@ -22,7 +23,7 @@ export function RowSize(props) {
                 id="rowSize"
                 className="RowSize-value"
                 onChange={(e, item) => {
-                    props.onRowSizeChanged(e, item.props.value, item.props.rowsize)
+                    props.onRowSizeChanged(e, item.props.value)
                 }}
                 MenuProps={MenuProps}
                 input={<Input />}

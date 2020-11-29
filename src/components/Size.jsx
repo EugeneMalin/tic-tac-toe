@@ -1,5 +1,6 @@
 import { FIELD_SIZE, ITEM_HEIGHT, ITEM_PADDING_TOP, MIN_FEILD_SIZE } from "../Const";
 import { Input, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
+import {ISize} from './interface/ISize';
 
 const MenuProps = {
     PaperProps: {
@@ -12,6 +13,7 @@ const MenuProps = {
 
 /**
  * Game field size setting component
+ * @param {ISize} props component options
  */
 export function Size(props) {
     return (

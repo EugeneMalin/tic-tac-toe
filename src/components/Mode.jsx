@@ -1,5 +1,6 @@
 import { DEFAULT_MODE, GAME_MODES, ITEM_HEIGHT, ITEM_PADDING_TOP } from "../Const";
 import { Input, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
+import {IMode} from './interface/IMode';
 
 const MenuProps = {
     PaperProps: {
@@ -12,6 +13,7 @@ const MenuProps = {
 
 /**
  * Mode settings component
+ * @param {IMode} props component options
  */
 export function Mode(props) {
     return (

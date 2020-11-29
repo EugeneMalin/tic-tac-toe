@@ -1,7 +1,7 @@
 import { ITEM_HEIGHT, ITEM_PADDING_TOP } from "../Const";
 import { Input, InputLabel, Select, MenuItem, FormControl } from "@material-ui/core";
 import { Engine } from "../data/Engine";
-
+import { IComplexity } from "./interface/IComplexity"
 const MenuProps = {
     PaperProps: {
         style: {
@@ -13,6 +13,7 @@ const MenuProps = {
 
 /**
  * Complexity setting component
+ * @param {IComplexity} props component options
  */
 export function Complexity(props) {
     return (
