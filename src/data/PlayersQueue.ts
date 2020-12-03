@@ -1,7 +1,7 @@
 import { Player } from "./Player";
 
 /**
- * Класс для управления игроками
+ * Gamers queue class
  */
 export class PlayersQueue {
     private _players: Player[];
@@ -13,6 +13,9 @@ export class PlayersQueue {
         this._players = [...players];
     }
 
+    /**
+     * Switchs on AI mode for players, but excludes first user of list
+     */
     onAI(): void {
         this._players.forEach((player, index) => {
             if (index) {
@@ -21,26 +24,29 @@ export class PlayersQueue {
         })
     }
 
+    /**
+     * Remove marks from users
+     */
     refresh(): void {
         this._players.forEach(player => player.unmark());
     }
 
     /**
-     * Получение списка игроков
+     * Gets the list of players
      */
     getItems(): Player[] {
         return this._players.slice();
     }
 
     /**
-     * Получение победителя, если он есть
+     * Gets winner
      */
     getWinner(): Player | undefined {
         return this._players.find(player => player.isWinner()); 
     }
 
     /**
-     * Получение нового пользователя, омещает выданного участника в конец списка
+     * Gets next user, the current user adds to the end of list
      */
     next(): Player {
         const pl = this._players.shift();

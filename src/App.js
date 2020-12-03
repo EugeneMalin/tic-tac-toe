@@ -40,6 +40,57 @@ class App extends Component {
     }
   }
 
+  render() {
+    const {game} = this.state;
+    const players = game.getMode() !== MULTI_MODE && !game.isActive() ? <PlayerSelect
+              className="App-players"
+              players={game.getPlayers()}
+              onPlayersUpdated={this.onPlayersUpdated}
+            /> : null;
+    return (
+      <div className="App">
+        <Header 
+          className='App-header'
+          mode={game.getMode()}
+          size={game.getFieldSize()}
+          rowsize={game.getFieldRowSize()}
+          complexity={game.getComplexity()} 
+          disabled={game.isActive()}
+
+          onSizeChanged={this.onSizeChanged}
+          onRowSizeChanged={this.onRowSizeChanged}
+          onComplexityChanged={this.onComplexityChanged}
+          onModeChanged={this.onModeChanged}
+        />
+        <body className='App-body'>
+          <State
+            className='App-state'
+            active={!game.isEnds()}
+            clear={game.isStarts()}
+            winner={game.getWinnerPlayer()}
+            player={game.getCurrentPlayer()}
+          />
+          <div className='App-gameField'>
+            <GameField
+              available={game.isActive()}
+              start={game.isStarts()}
+              field={game.getField()}
+              onStopClicked={this.onStopClicked}
+              onStartClicked={this.onStartClicked}
+              onRestartClicked={this.onResetClicked}
+              onPointClicked={this.onPointClicked}
+            />
+            {players}
+          </div>
+        </body>
+        
+        <footer className='App-footer'>
+          <h6>Eugene Novikov 2020</h6>
+        </footer>
+      </div>
+    );
+  }
+
   /**
    * Handler for row of units
    * @param {Event} e 
@@ -97,12 +148,18 @@ class App extends Component {
     })
   }
 
+  /**
+   * Handler for start button click
+   */
   onStartClicked() {
     this.setState({
       game: this.state.game.start()
     })
   }
 
+  /**
+   * Handler for stop button click
+   */
   onStopClicked() {
     this.setState({
       game: this.state.game.refresh()
@@ -121,61 +178,14 @@ class App extends Component {
     });
   }
 
+  /**
+   * Handler for players update
+   * @param {Players[]} players new players
+   */
   onPlayersUpdated(players) {
     this.setState({
       game: this.state.game.updatePlayers(players)
     })
-  }
-
-  render() {
-    const {game} = this.state;
-    const players = game.getMode() !== MULTI_MODE && !game.isActive() ? <PlayerSelect
-              className="App-players"
-              players={game.getPlayers()}
-              onPlayersUpdated={this.onPlayersUpdated}
-            /> : null;
-    return (
-      <div className="App">
-        <Header 
-          className='App-header'
-          mode={game.getMode()}
-          size={game.getFieldSize()}
-          rowsize={game.getFieldRowSize()}
-          complexity={game.getComplexity()} 
-          disabled={game.isActive()}
-
-          onSizeChanged={this.onSizeChanged}
-          onRowSizeChanged={this.onRowSizeChanged}
-          onComplexityChanged={this.onComplexityChanged}
-          onModeChanged={this.onModeChanged}
-        />
-        <body className='App-body'>
-          <State
-            className='App-state'
-            active={!game.isEnds()}
-            clear={game.isStarts()}
-            winner={game.getWinnerPlayer()}
-            player={game.getCurrentPlayer()}
-          />
-          <div className='App-gameField'>
-            <GameField
-              available={game.isActive()}
-              start={game.isStarts()}
-              field={game.getField()}
-              onStopClicked={this.onStopClicked}
-              onStartClicked={this.onStartClicked}
-              onRestartClicked={this.onResetClicked}
-              onPointClicked={this.onPointClicked}
-            />
-            {players}
-          </div>
-        </body>
-        
-        <footer className='App-footer'>
-          <h6>Eugene Novikov 2020</h6>
-        </footer>
-      </div>
-    );
   }
 }
 

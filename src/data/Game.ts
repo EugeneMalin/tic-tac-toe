@@ -9,7 +9,7 @@ import { StartState } from "./states/Start";
 import { WinState } from "./states/Win";
 
 /**
- * Класс игры, является фасадом для работы с интерфейсом
+ * Game facade class
  */
 export class Game {
     private _field: Field;

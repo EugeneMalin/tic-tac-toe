@@ -1,11 +1,7 @@
-/**
- * Класс для хранения состояния текущей точки
- */
-
 import { EMPTY_POINT_ICON } from "../Const";
 
 /**
- * Перечень цветов для отображения состояний
+ * Hash map of colors for state
  */
 const COLORS = {
     empty: 'disabled',
@@ -13,6 +9,9 @@ const COLORS = {
     default: 'primary'
 }
 
+/**
+ * Game field unit class
+ */
 export class Point {
     constructor(x, y, player = null, state = 'empty') {
         this.x = x;
@@ -21,11 +20,18 @@ export class Point {
         this.state = player ? 'default' : state;
     }
 
+    /**
+     * Setting the player for point
+     * @param {Player} player player that mark point at turn
+     */
     putPlayer(player) {
         this.player = player;
         this.state = 'default';
     }
 
+    /**
+     * Gets the identifier of user
+     */
     getId() {
         if (!this.player) {
             return null;
@@ -33,10 +39,16 @@ export class Point {
         return this.player.getId();
     }
 
+    /**
+     * Checks that point is free
+     */
     isClickable() {
         return !this.player;
     }
 
+    /**
+     * Gets the icon for point using state or player
+     */
     getIcon() {
         if (!this.player) {
             return <EMPTY_POINT_ICON/>;
@@ -45,6 +57,9 @@ export class Point {
         return <Icon/>;
     }
 
+    /**
+     * Gets the color of point using state
+     */
     getColor() {
         return COLORS[this.state]
     }

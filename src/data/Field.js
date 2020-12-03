@@ -3,7 +3,7 @@ import { Analyzer } from "./Analyzer";
 import { Point } from "./Point"
 
 /**
- * Класс для хранения и обработки состояния игрового поля
+ * Game board class
  */
 export class Field {
     constructor(size = MIN_FEILD_SIZE, rowSize = MIN_FEILD_SIZE) {
@@ -22,21 +22,21 @@ export class Field {
     }
 
     /**
-     * Проверка что на поле еще есть место для хода
+     * Check that all points used
      */
     isFull() {
         return !this.freeCount;
     }
     
     /**
-     * Проверка что поле полностью свободно (игра не началась)
+     * Checks that field is emplty
      */
     isClear() {
         return this.freeCount === this.points.length * this.points[0].length;
     }
 
     /**
-     * Выполняет функцию map над каждым элементом списка точек
+     * Run map of each row
      * @see Array.prototype:map
      * @param {Function} callback 
      */
@@ -45,7 +45,7 @@ export class Field {
     }
 
     /**
-     * Выполняет обход всех точек не позволяет менять исходный набор
+     * Run over all points
      */
     each(callback) {
         return [...this.points].forEach((row) => {
